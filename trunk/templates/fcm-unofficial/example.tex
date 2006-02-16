@@ -1,0 +1,47 @@
+%
+% A sample LaTeX thesis file using ppfcmthesis class.
+%
+% This file is UNOFFICIAL and NOT ENDORSED by the university.
+%
+% Written by Dawid Weiss.
+%
+% Class options:
+%     pl        Polish headers and typesetting.
+%     en        English headers and typesetting.
+%
+\documentclass[pl]{ppfcmthesis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+
+% Put your thesis details here
+\author{Ignacy Iksiński}
+\title{A Few Words About the Nature of Things}
+\ppsupervisor{prof.~dr hab.~inż.~Alojzy Wołodyjowski}
+\ppyear{2006}
+
+\begin{document}
+
+\maketitle
+
+% title page, front matter
+\frontmatter%
+
+% \input{frontmatter.tex}
+
+% main body of your thesis starts here.
+\mainmatter%
+
+\chapter{Introduction}
+A well written thesis starts with an introduction.
+
+% bibliography starts here.
+\bibliographystyle{plplain}%
+{\small\bibliography{references}}
+
+% all appendices and extra material come at the end.
+\backmatter%
+
+\chapter{An appendix}
+
+\end{document}
