@@ -1,0 +1,37 @@
+
+\documentclass{article}
+
+\usepackage[OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{polski}
+
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{calc}
+
+
+\title{Justowanie kolumn w środowisku \texttt{longtable}}
+\author{Dawid Weiss}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Przykład}
+
+\begin{longtable}{>{\leftskip\fill}p{2.5cm} @{\hspace{0.5cm}} >{\rightskip\fill}p{\linewidth-2cm}}
+\hline
+Opis: & 
+Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki.
+Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. \\
+\hline
+Długi opis Długi opis Długi opis Długi opis Długi opis: & 
+Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki.
+Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. Zawartość komórki. \\
+\hline
+\end{longtable}
+
+
+\end{document}
