@@ -9,7 +9,7 @@
 %     pl        Polish headers and typesetting.
 %     en        English headers and typesetting.
 %
-\documentclass[pl]{ppfcmthesis}
+\documentclass[en]{ppfcmthesis}
 
 \usepackage[utf8]{inputenc}
 \usepackage[OT4]{fontenc}
@@ -22,26 +22,21 @@
 
 \begin{document}
 
-\maketitle
-
-% title page, front matter
-\frontmatter%
-
-% \input{frontmatter.tex}
+% title page, front matter, contents list.
+\maketitle\frontmatter\pagenumbering{roman}{\small\tableofcontents}\cleardoublepage
 
 % main body of your thesis starts here.
 \mainmatter%
+\input{01-introduction.tex}
+\input{02-examples.tex}
 
-\chapter{Introduction}
-A well written thesis starts with an introduction.
 
 % bibliography starts here.
 \bibliographystyle{plplain}%
-{\small\bibliography{references}}
+{\small\bibliography{bibliography}}
 
 % all appendices and extra material come at the end.
 \backmatter%
-
-\chapter{An appendix}
+\input{0a-appendix.tex}
 
 \end{document}

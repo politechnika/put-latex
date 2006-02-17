@@ -26,6 +26,13 @@
 \if@pppolish
 \RequirePackage{polski}
 \fi
+\RequirePackage{setspace}
+\RequirePackage{graphicx}
+\ifx\pdfoutput\undefined
+	\DeclareGraphicsExtensions{.eps}
+\else
+	\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\fi
 
 %
 % Customize title page
@@ -37,8 +44,9 @@
 
 \setlength{\droptitle}{0cm}
 
-\renewcommand{\maketitlehooka}{\noindent%
+\renewcommand{\maketitlehooka}{%
 \begin{center}
+\begin{textblock}{10}(0,0)\hfill\includegraphics[width=1.5cm]{figures/template/logo-pp}\end{textblock}%
 \if@pppolish
 Politechnika Pozna\'nska\\Instytut Informatyki
 \else
@@ -58,5 +66,58 @@ Thesis supervisor\\\@ppsupervisor
 \fi
 \vspace{2cm}\begin{center}Pozna\'n, \@ppyear\end{center}
 }
+
+%
+% Customize running titles and page style.
+%
+
+\makepagestyle{ppfcmthesis}
+\makeevenfoot{ppfcmthesis}{}{}{}
+\makeatletter
+\newcommand{\@ppfcmthesismarks}{%
+  \let\@mkboth\markboth
+  \def\chaptermark##1{\markboth{##1}{##1}}    % left mark & right marks
+  \def\sectionmark##1{\markright{%
+    \ifnum \c@secnumdepth>\z@
+      \thesection. \ %
+    \fi
+    ##1}}
+  \def\tocmark{\markboth{\contentsname}{}}
+  \def\lofmark{\markboth{\listfigurename}{}}
+  \def\lotmark{\markboth{\listtablename}{}}
+  \def\bibmark{\markboth{\bibname}{}}
+  \def\indexmark{\markboth{\indexname}{}}
+}
+\makepsmarks{ppfcmthesis}{\@ppfcmthesismarks}
+\makeatother
+\makeevenhead{ppfcmthesis}{\thepage}{}{\normalfont\small\itshape\leftmark}
+\makeoddhead{ppfcmthesis}{\normalfont\small\itshape\rightmark}{}{\thepage}
+
+%
+% Customize book style
+%
+\pagestyle{ppfcmthesis}
+
+\settypeblocksize{*}{32pc}{1.618}
+\setlrmargins{*}{1.47in}{*}
+\setulmargins{*}{*}{1.3}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+
+\onehalfspacing
+
+\setcounter{tocdepth}{4}
+\maxsecnumdepth{subsection}
+\setsecnumdepth{subsection}
+
+\changecaptionwidth
+\captionwidth{.9\linewidth}
+\captionnamefont{\footnotesize\scshape}
+\captiontitlefont{\footnotesize}
+
+\def\thesubsubsection {\thesubsection .\arabic{subsubsection}}
+
+\checkandfixthelayout
+\tightlists
 
 
