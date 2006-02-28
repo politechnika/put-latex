@@ -1,7 +1,7 @@
 %
 % A sample LaTeX thesis file using ppfcmthesis class.
 %
-% This file is UNOFFICIAL and NOT ENDORSED by the university.
+% This file is UNOFFICIAL and NOT (URRENTLY) ENDORSED by the University.
 %
 % Written by Dawid Weiss.
 %
@@ -23,16 +23,20 @@
 \begin{document}
 
 % title page, front matter, contents list.
-\maketitle\frontmatter\pagenumbering{roman}{\small\tableofcontents}\cleardoublepage
+\maketitle\cleardoublepage%
+\thispagestyle{empty}\vspace*{\fill}\noindent\begin{center}%
+Tutaj karta pracy dyplomowej;\\w oryginale w wersji do archiwum PP, w kopiach ksero.\end{center}\vfill\cleardoublepage%
+\frontmatter\pagenumbering{roman}{\small\tableofcontents}\cleardoublepage%
+
 
 % main body of your thesis starts here.
 \mainmatter%
 \input{01-introduction.tex}
-\input{02-examples.tex}
+\input{02-latex.tex}
 
 
 % bibliography starts here.
-\bibliographystyle{plplain}%
+\bibliographystyle{apalike}%
 {\small\bibliography{bibliography}}
 
 % all appendices and extra material come at the end.
