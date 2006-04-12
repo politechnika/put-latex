@@ -1,0 +1,48 @@
+
+\documentclass[a4paper,twoside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage[absolute]{textpos}
+\usepackage{graphicx}
+\usepackage[bookmarks=false,pdffitwindow]{hyperref}
+
+\usepackage{pdfpages}
+
+\title{How to stretch a picture to fill the whole page?}
+\author{Dawid Weiss}
+\date{April 12, 2006}
+
+\begin{document}
+
+\maketitle
+
+\section{Solution using \textsf{textpos} Package}
+
+Perhaps the simplest way to do it is with \textsf{textpos} package
+using the \texttt{absolute} option.
+
+Note that if you are already using \textsf{textpos}, then it may
+be difficult to position the box absolutely.
+
+\clearpage\thispagestyle{empty}~%
+\textblockorigin{0cm}{0cm}
+\begin{textblock*}{\paperwidth}(0cm,0cm)
+\noindent \includegraphics[width=\paperwidth]{frontpage.jpg}
+\end{textblock*}
+
+\clearpage%
+\section{Solution by PDF inclusion}
+
+This solution is perhaps even better (if you're using \texttt{pdflatex}). Just
+include a PDF page directly in the generated document. You'll need \textsf{pdfpages}
+package for that. To create a PDF from an image (JPG or PNG), use GIMP to save it as
+an EPS file and then convert the EPS to a PDF with GhostScript or anything else.
+
+\includepdfmerge{frontpage-eps.pdf,1}
+
+
+
+
+\end{document}
+
