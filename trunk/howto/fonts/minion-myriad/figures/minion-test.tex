@@ -1,0 +1,59 @@
+
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ams}
+
+\usepackage[textosf,mathlf]{MinionPro}
+\usepackage{pifont}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\noindent%
+This is Minion. ABCDEFGHIJKLMNOPQRSTUVWXYZ. 
+abcdefghijklmnopqrstuvwxyz. 0123456789.
+Support for ligatures: ffi fi fl
+
+\noindent\textbf{%
+This is Minion Bold. ABCDEFGHIJKLMNOPQRSTUVWXYZ. 
+abcdefghijklmnopqrstuvwxyz. 0123456789.
+Support for ligatures: ffi fi fl
+}
+
+\noindent\textsl{%
+This is Minion Slanted. ABCDEFGHIJKLMNOPQRSTUVWXYZ. 
+abcdefghijklmnopqrstuvwxyz. 0123456789.
+Support for ligatures: ffi fi fl
+}
+
+\noindent\textit{%
+This is Minion Oblique. ABCDEFGHIJKLMNOPQRSTUVWXYZ. 
+abcdefghijklmnopqrstuvwxyz. 0123456789.
+Support for ligatures: ffi fi fl
+}
+
+\noindent\textit{\textbf{%
+This is Minion Bold Oblique. ABCDEFGHIJKLMNOPQRSTUVWXYZ. 
+abcdefghijklmnopqrstuvwxyz. 0123456789.
+Support for ligatures: ffi fi fl
+}}
+
+\noindent
+Math mode:
+\begin{equation}
+w(i,j) = 123 + 4 + \mathrm{mi}_{ij} \times 
+         \frac{\mathrm{tf}_{ij}}{\mathrm{tf}_{ij} + 1} \times 
+         \frac{\min\Big(\sum\limits_{k}^{}\mathrm{tf}_{kj},
+                    \sum\limits_{k}^{}\mathrm{tf}_{ik}\Big)}
+              {\min\Big(\sum\limits_{k}^{}\mathrm{tf}_{kj},
+                    \sum\limits_{k}^{}\mathrm{tf}_{ik}\Big) + 1}
+\end{equation}
+
+\noindent
+And a few ornaments: \Pisymbol{MinionPro-Extra}{111}
+\Pisymbol{MinionPro-Extra}{112} \Pisymbol{MinionPro-Extra}{110}
+
+\end{document}
