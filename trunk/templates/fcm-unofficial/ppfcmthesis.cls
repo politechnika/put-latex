@@ -4,7 +4,8 @@
 %
 % This class is UNOFFICIAL and NOT ENDORSED by the university.
 %
-% Written by Dawid Weiss.
+% (c) 2006 Dawid Weiss
+% Poznan University of Technology
 %
 %
 % Todo:
@@ -14,33 +15,72 @@
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2006/02/16 v0.9 PP FCM thesis class]
-\newif\if@pppolish
+\ProvidesClass{ppfcmthesis}[2006/06/20 v0.91 PP FCM thesis class]
+
 %
 % Declare default options and load base package (memoir).
 %
-\DeclareOption{en}{\@pppolishfalse}
-\DeclareOption{pl}{\@pppolishtrue}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ExecuteOptions{a4paper,pl,11pt,oneside,final}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax
 \LoadClass{memoir}
 
 %
 % Require additional packages
 %
-\RequirePackage{textpos}
+\RequirePackage{babel}
+\newif\if@pppolish
+\iflanguage{polish}{\@pppolishtrue}{\@pppolishfalse}
+
 \if@pppolish
-\RequirePackage{polski}
-\fi
-\RequirePackage{setspace}
-\RequirePackage{graphicx}
-\ifx\pdfoutput\undefined
-	\DeclareGraphicsExtensions{.eps}
+\selectlanguage{polish}
+\RequirePackage{indentfirst}
+\addto\captionspolish{\renewcommand{\bibname}{Literatura}}   % Force "Literatura" instead of "Bibliografia"
 \else
+\selectlanguage{english}
+\fi
+
+\RequirePackage{setspace}
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}
+
+\ifpdf
 	\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\else
+	\DeclareGraphicsExtensions{.eps}
 \fi
 \RequirePackage{fancyvrb}
+
+%
+% Configure Hyperref
+%
+
+\ifpdf
+        \usepackage[unicode,linktocpage,bookmarks]{hyperref}
+\else
+        \usepackage[dvips,unicode,linktocpage,bookmarks]{hyperref}
+\fi
+\hypersetup{
+    pdffitwindow=true,
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    pdfpagelayout=SinglePage,
+    pdfpagemode=UseOutlines,
+    pdfstartview=Fit,
+    linkcolor=black,
+    citecolor=black,
+    anchorcolor=black,
+    filecolor=black,
+    menucolor=black,
+    pagecolor=black,
+    urlcolor=black,
+    pdftitle={},
+    pdfauthor={},
+    pdfkeywords={}
+}
+\RequirePackage{memhfixc}
+\RequirePackage{url}
 
 %
 % Customize title page
@@ -54,14 +94,13 @@
 
 \renewcommand{\maketitlehooka}{%
 \begin{center}
-\begin{textblock}{10}(0,0)\hfill\includegraphics[width=1.5cm]{figures/template/logo-pp}\end{textblock}%
 \if@pppolish
 Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
 \else
 Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
 \fi\end{center}}
 
-\pretitle{\vspace{2cm}\begin{center}\if@pppolish Praca dypomowa magisterska\else Master's thesis\fi\par\vspace{1cm}\Large\bfseries\MakeUppercase}
+\pretitle{\vspace{2cm}\begin{center}\if@pppolish Praca dyplomowa magisterska\else Master's thesis\fi\par\vspace{1cm}\Large\bfseries\MakeUppercase}
 \posttitle{\end{center}}
 
 \renewcommand{\maketitlehookb}{\vspace{1cm}}
@@ -70,9 +109,47 @@ Poznan University of Technology\\Faculty of Computer Science and Management\\Ins
 \if@pppolish
 Promotor\\\@ppsupervisor
 \else
-Thesis supervisor\\\@ppsupervisor
-\fi
+Supervisor\\\@ppsupervisor
+\fi\end{center}
 \vspace{2cm}\begin{center}Pozna\'n, \@ppyear\if@pppolish~r.\fi\end{center}
+}
+
+%
+% Define colophon 
+%
+\newcommand{\ppcolophon}{
+\cleardoublepage\thispagestyle{empty}\vspace*{\fill}%
+\footnotesize\singlespacing\noindent%
+\raisebox{-1.3cm}{\includegraphics[height=1.5cm]{figures/template/logo-pp}}%
+\hspace{1.5em}%
+\begin{minipage}[t]{8cm}%
+\vglue 0pt\copyright{} \@ppyear\ \@author
+
+\medskip\noindent%
+\if@pppolish%
+Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
+\else%
+Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
+\fi
+
+\medskip\noindent%
+\if@pppolish%
+Skład przy użyciu systemu \LaTeX\ i czcionki Computer Modern.
+\else%
+Typeset using \LaTeX\ in Computer Modern.
+\fi
+
+\medskip\noindent Bib\TeX{}:\\[1ex]
+\tiny\texttt{%
+@mastersthesis\{ key,\\
+\hspace*{2em}author = "\@author",\\
+\hspace*{2em}title = "\{\@title\}",\\
+\hspace*{2em}school = "Poznan University of Technology",\\
+\hspace*{2em}address = "Pozna\{$\backslash$'n\}, Poland",\\
+\hspace*{2em}year = "\@ppyear",\\
+\}
+}
+\end{minipage}
 }
 
 %
@@ -102,8 +179,16 @@ Thesis supervisor\\\@ppsupervisor
 \makeoddhead{ppfcmthesis}{\normalfont\small\itshape\rightmark}{}{\thepage}
 
 %
+% Customize Table of Contents
+%
+\setcounter{tocdepth}{3}
+\maxtocdepth{subsubsection}
+\maxsecnumdepth{subsection}
+
+%
 % Customize book style
 %
+% \tightlists
 \pagestyle{ppfcmthesis}
 \setstocksize{297mm}{210mm}
 \settrimmedsize{297mm}{210mm}{*}
@@ -115,18 +200,27 @@ Thesis supervisor\\\@ppsupervisor
 \setheaderspaces{*}{2\onelineskip}{*}
 \onehalfspacing
 
-\setcounter{tocdepth}{4}
-\maxsecnumdepth{subsection}
-\setsecnumdepth{subsection}
-
 \changecaptionwidth
 \captionwidth{.9\linewidth}
 \captionnamefont{\footnotesize\scshape}
 \captiontitlefont{\footnotesize}
 
+\newcommand{\fcmfcaption}[2][\@empty]{
+\captionnamefont{\footnotesize\bfseries}%
+\captiondelim{.~}
+\captionstyle{}
+\captiontitlefont{\footnotesize}
+\ifx #1\@empty \caption{#2}\else \caption[#1]{#2}}
+
+\newcommand{\fcmtcaption}[2][\@empty]{
+\captionnamefont{\footnotesize\bfseries\hfill}%
+\captiondelim{}
+\captionstyle{\raggedleft\\}
+\captiontitlefont{\footnotesize\normalfont}
+\ifx #1\@empty \caption{#2}\else \caption[#1]{#2}}
+
 \def\thesubsubsection {\thesubsection .\arabic{subsubsection}}
 
-\tightlists
 \checkandfixthelayout
 
 %
