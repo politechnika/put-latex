@@ -8,12 +8,6 @@
 % Poznan University of Technology
 %
 %
-% Todo:
-% - chapter header style.
-% - figure and table header styles (and numeration)
-% - itemization styles (I'd leave them as they are defined in memoir)
-%
-%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{ppfcmthesis}[2006/06/20 v0.91 PP FCM thesis class]
 
