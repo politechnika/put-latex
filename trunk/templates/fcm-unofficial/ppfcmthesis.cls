@@ -9,7 +9,7 @@
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2006/06/20 v0.91 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2006/07/17 v0.92 PP FCM thesis class]
 
 %
 % Declare default options and load base package (memoir).
