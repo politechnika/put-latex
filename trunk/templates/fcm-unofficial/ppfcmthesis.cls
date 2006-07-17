@@ -116,19 +116,20 @@ Supervisor\\\@ppsupervisor
 \footnotesize\singlespacing\noindent%
 \raisebox{-1.3cm}{\includegraphics[height=1.5cm]{figures/template/logo-pp}}%
 \hspace{1.5em}%
-\begin{minipage}[t]{8cm}%
+\begin{minipage}[t]{10cm}%
 \vglue 0pt\copyright{} \@ppyear\ \@author
 
 \medskip\noindent%
 \if@pppolish%
-Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
+Instytut Informatyki, Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\%
+Politechnika Pozna\'nska%
 \else%
 Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
 \fi
 
 \medskip\noindent%
 \if@pppolish%
-Skład przy użyciu systemu \LaTeX\ i czcionki Computer Modern.
+Sk{\l}ad przy u{\.z}yciu systemu \LaTeX\ i czcionki Computer Modern.
 \else%
 Typeset using \LaTeX\ in Computer Modern.
 \fi
