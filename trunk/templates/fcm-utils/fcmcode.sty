@@ -1,0 +1,11 @@
+
+\ProvidesPackage{fcmcode}[2006/07/17 v0.9 FCM utility - code blocks and such]
+
+\RequirePackage{fancyvrb}
+
+% Inline code.
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Verbatim code block.
+\DefineVerbatimEnvironment{codeblock}{Verbatim}{%
+frame=lines,numbers=left,xleftmargin=2em,fontsize=\footnotesize}

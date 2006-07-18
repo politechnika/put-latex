@@ -1,0 +1,15 @@
+
+\ProvidesPackage{fcmquote}[2006/07/17 v0.9 FCM utility - redefine quotations in italic]
+
+\renewenvironment{quotation}%
+               {\list{}{\listparindent 1.5em%
+                        \itemindent    \listparindent
+                        \rightmargin   \leftmargin
+                        \parsep        \z@ \@plus\p@
+                        \itshape}%
+                \item[]}%
+               {\endlist}
+\renewenvironment{quote}%
+               {\list{}{\rightmargin\leftmargin\itshape}%
+                \item[]}%
+               {\endlist}
