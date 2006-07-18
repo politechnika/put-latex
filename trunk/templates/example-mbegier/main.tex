@@ -1,44 +1,38 @@
-%
-% A sample LaTeX thesis file using ppfcmthesis class.
-%
-% This file is UNOFFICIAL and NOT (URRENTLY) ENDORSED by the University.
-%
-% Written by Dawid Weiss.
-%
-% Class options:
-%     pl        Polish headers and typesetting.
-%     en        English headers and typesetting.
-%
+
 \documentclass[polish,a4paper,oneside]{../fcm-unofficial/ppfcmthesis}
 
+\usepackage{../fcm-utils/fcmcode}
+\usepackage{../fcm-utils/fcmquote}
 \usepackage[utf8]{inputenc}
 \usepackage[OT4]{fontenc}
+\usepackage{varioref}               % polecenie vref (dodające "na stronie XX" jeśli jest to potrzebne)
+\usepackage{booktabs}               % polecenia linii poziomych do tabular
+\usepackage{afterpage}
 \usepackage{url}
-\usepackage{../fcm-utils/fcmcode}
 
-% Put your thesis details here
 \author{Mirosław Begier}
-%\title{JDBMeasure -- benchmark do testowania wydajności systemów zarządzania bazami danych}
 \title{Benchmark systemu zarządzania bazą danych}
-\ppsupervisor{dr~hab.~inż.~Maciej Drozdowski,~prof.PP}
+\ppsupervisor{dr hab.~inż.~Maciej Drozdowski, prof.~PP}
 \ppyear{2006}
 
 \begin{document}
-% 
 
 % title page, front matter, contents list.
 \maketitle\cleardoublepage%
 \thispagestyle{empty}\vspace*{\fill}\noindent\begin{center}%
 Tutaj karta pracy dyplomowej;\\w oryginale w wersji do archiwum PP, w kopiach ksero.\end{center}\vfill\cleardoublepage%
-\thispagestyle{empty}\vspace*{\fill}\vfill\noindent
-\hspace{2cm}Chciałbym w tym miejscu złożyć najserdeczniejsze podziękowania mojemu promotorowi, dr~hab.~inż.~Maciejowi~Drozdowskiemu, 
-dzięki któremu powstała ta praca, za jego życzliwość, zaangażowanie, cenne uwagi oraz czas poświęcony na przeprowadzone konsultacje.
-\\
-\begin{flushright}
-Mirosław Begier
-\end{flushright}
+
+\thispagestyle{empty}\vspace*{15cm}%
+\hfill\begin{minipage}{.7\linewidth}
+Chciałbym w tym miejscu złożyć najserdeczniejsze podziękowania mojemu promotorowi, 
+dr~hab.~inż.~Maciejowi~Drozdowskiemu, dzięki któremu powstała ta praca, za jego
+życzliwość, zaangażowanie, cenne uwagi oraz czas poświęcony na przeprowadzone konsultacje.
+
+\noindent\flushright Mirosław Begier
+\end{minipage}
 \cleardoublepage%
-\frontmatter\pagenumbering{roman}{\small\tableofcontents}\cleardoublepage%
+
+\frontmatter\pagenumbering{Roman}{\tableofcontents*}\cleardoublepage%
 
 % main body of your thesis starts here.
 \mainmatter%
