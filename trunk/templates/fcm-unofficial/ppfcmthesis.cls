@@ -9,7 +9,9 @@
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2006/07/17 v0.92 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2006/07/18 v0.93 PP FCM thesis class]
+
+% v.0.93 Varioref is loaded prior to hyperref.
 
 %
 % Declare default options and load base package (memoir).
@@ -49,6 +51,10 @@
 % Configure Hyperref
 %
 
+\RequirePackage{url}
+\RequirePackage{nameref}
+\RequirePackage{varioref}
+  
 \ifpdf
         \usepackage[unicode,linktocpage,bookmarks]{hyperref}
 \else
@@ -74,7 +80,6 @@
     pdfkeywords={}
 }
 \RequirePackage{memhfixc}
-\RequirePackage{url}
 
 %
 % Customize title page
