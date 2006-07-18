@@ -1,0 +1,66 @@
+\chapter{Wnioski i podsumowanie prac}
+Rozdział ten stanowi krótkie podsumowanie prac związanych z budową benchmarku,
+jak i odpowiedź na postawione na początku pracy pytania i cele. Wskazuje także kierunki dalszego rozwoju.
+
+\section{Wyniki i wnioski z prac}
+Podstawowym celem niniejszej pracy było stworzenie benchmarku, który umożliwiałby mierzenie
+wydajności SZBD. Autorowi nie chodziło jednak o stworzenie typowego benchmarku
+wraz ze związanymi z nim ograniczeniami min.:
+\begin{itemize}
+\item jednym niemodyfikowalnym modelem,
+\item występowaniem często jako specyfikacja, którą trzeba dla każdego DBMS niezależnie implementować,
+\item testowaniem jednego konkretnego DBMS.
+\end{itemize}
+Głównym celem było przezwyciężenie powyższych ograniczeń i stworzenie narzędzia,
+bardziej uniwersalnego, posiadającego szerszą gamę zastosowań.
+Co zatem uzyskano? Czy stworzony benchmark spełnia powyższe kryteria?
+W stworzonym benchmarku definicja testu, procedury testowej, składa się z trzech modeli.
+Podział taki, ułatwia definiowanie testu, każdy model ma bowiem ściśle określone przeznaczenie, 
+razem zaś stanowią pełną definicję, uwzględniającą wszystkie aspekty rzeczywistego 
+systemu opartego o współpracę z DBMS. Takie podejście ułatwia definiowanie testu niezależnie od DBMS. Zmiana DBMS 
+sprowadza się do zmiany dialektu i parametrów połączenia w modelu testu. Koncepcja 
+taka zapewnia również łatwą, wielokryterialną skalowalność. Sama procedura testu jest niezależna 
+od jednego konkretnego modelu bazy danych, czy modelu obciążenia. Wykorzystanie 
+języka Java i sterowników JDBC umożliwia testowanie różnych DBMS, jak i uruchamianie
+benchmarku na różnych systemach operacyjnych.
+
+Zbudowany benchmark charakteryzują najpełniej następujące cechy:
+\begin{itemize}
+\item niezależność modelu od konkretnego DBMS,
+\item niezależność procedury testu od konkretnego modelu,
+\item niezależność mechanizmów analizy wyników od konkretnego modelu,
+\item możliwość testowania różnych DBMS (Oracle, PostgreSQL, MySQL),
+\item możliwość testowania różnych baz danych,
+\item możliwość definiowania własnych modeli baz danych i obciążenia,
+\item możliwość analizy modelu bazy danych rzeczywistego systemu i analizy modelu obciążenia,
+\item możliwość porównywania wydajności różnych sterowników JDBC.
+\end{itemize}
+
+\section{Propozycje dalszego rozwoju}
+
+Budując dowolny system informatyczny w pierwszej kolejności należy wyrzec się 
+przeświadczenia o własnej nieomylności, a także przekonania, że stworzone rozwiązanie
+będzie rozwiązaniem idealnym, nie wymagającym w przyszłości zmian. 
+Użytkownicy są bowiem najlepszym weryfikatorem stworzonego rozwiązania i podjętych decyzji projektowych.
+To bowiem zbudowane rozwiązanie jest dla nich i nigdy na odwrót.
+W świecie inżynierii oprogramowania istnieje powiedzenie, iż ,,system nie jest dobry
+przed wersją trzecią''. Trudno nie zgodzić się z powyższymi stwierdzeniami. Również
+stworzony benchmark, jest pewnym kompromisem. 
+
+Autor zatem, świadomy opisanych powyżej problemów dołożył wszelkich starań by 
+zbudowane rozwiązanie było łatwe w rozbudowie czy modyfikacji.
+
+Jeżeli benchmark znajdzie zastosowanie to z pewnością w przyszłości będzie istniała konieczność
+wprowadzania w nim modyfikacji. Już na etapie prac zauważono, iż dla modeli
+bazy danych i obciążenia najlepszym rozwiązaniem było by stworzenie edytorów graficznych.
+Ze względu jednak na inny priorytet zadań i celów pracy, stworzenie takich edytorów 
+zostało wyłączone z niniejszej wersji benchmarku. Nie mniej jednak postanowiono
+wykorzystać rozwiązania ułatwiające zbudowanie takich edytorów w przyszłości.
+W procesie budowy aplikacji graficznej serwera benchmarku użyto zatem środowiska
+Eclipse RCP~\cite{RCP1} w wersji 3.2.
+
+Benchmark można by również rozszerzyć o testy w oparciu o scenariusze. Scenariusz określa 
+z ustalonym prawdopodobieństwem kolejność wykonywania operacji/transakcji po sobie. Umożliwia zatem
+stworzenie testów jeszcze bardziej zbliżonych do rzeczywistości.
+
+
