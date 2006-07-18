@@ -1,0 +1,172 @@
+
+\chapter{XML Schema dla plików wejściowych i~wyjściowych}\label{schema}
+
+W dodatku tym zostały zawarte specyfikacje formatów plików wejściowych i wyjściowych dla programu MultiSched.
+
+\begin{listing}
+\caption{XML Schema dla pliku opisującego dane wejściowe do algorytmu szeregowania zadań jednorodnych.}
+\begin{codeblock}
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd"  elementFormDefault="qualified"
+xmlns="http://tempuri.org/XMLSchema.xsd" xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="schedule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="dataVolumeSize" type="xs:unsignedLong" />
+<xs:element name="numberOfTasks" type="xs:positiveInteger" />
+<xs:element name="numberOfProcessors" type="xs:positiveInteger" />
+<xs:element name="numberOfPacks" type="xs:positiveInteger" />
+<xs:element name="processorsData">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="processor" maxOccurs="unbounded">
+<xs:complexType>
+<xs:attribute name="id" type="xs:ID" />
+<xs:sequence>
+<xs:element name="cost" type="xs:float" />
+<xs:element name="processingRate" type="xs:float" />
+<xs:element name="communicationRate" type="xs:float" />
+<xs:element name="communicationStartupTime" type="xs:float" />
+<xs:element name="bufferSize" type="xs:float" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="geneticAlgorithmParameters" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="populationSize" type="xs:positiveInteger" />
+<xs:element name="maxLengthOfIndividualsInStartPopulation" type="xs:positiveInteger" />
+<xs:element name="mutationPercent" type="xs:decimal" />
+<xs:element name="crossPercent" type="xs:decimal" />
+<xs:element name="numberOfIterationsToStop" type="xs:positiveInteger" />
+<xs:element name="numberOfIterationsWithoutImprovementToStop" type="xs:positiveInteger" />
+<xs:element name="tournamentGroupSize"  type="xs:nonNegativeInteger" />
+<xs:element name="startPopulationGenerationMethod">
+<xs:simpleType>
+<xs:restriction base="xs:nonNegativeInteger">
+<xs:enumeration value="0" />
+<xs:enumeration value="1" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="minLengthOfIndividualsInStartPopulation" type="xs:positiveInteger" />
+<xs:element name="selectionMethod">
+<xs:simpleType>
+<xs:restriction base="xs:positiveInteger">
+<xs:enumeration value="1" />
+<xs:enumeration value="2" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="methodOfChoosingCrossPoint">
+<xs:simpleType>
+<xs:restriction base="xs:positiveInteger">
+<xs:enumeration value="1" />
+<xs:enumeration value="2" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="methodOfMutation">
+<xs:simpleType>
+<xs:restriction base="xs:positiveInteger">
+<xs:enumeration value="1" />
+<xs:enumeration value="2" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element></xs:sequence></xs:complexType></xs:element>
+</xs:sequence></xs:complexType></xs:element></xs:schema>
+\end{codeblock}
+\end{listing}
+
+\begin{listing}
+\caption{XML Schema dla pliku opisującego pluginy dostępne w systemie.}
+\begin{codeblock}
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd"
+elementFormDefault="qualified"
+xmlns="http://tempuri.org/XMLSchema.xsd"
+xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="plugins">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="plugin" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="algorithm">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="name" type="xs:string" />
+<xs:element name="author" type="xs:string" />
+<xs:element name="description" type="xs:string" />
+<xs:element name="type">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="exact" />
+<xs:enumeration value="heuristic" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+<xs:element name="returnResults" type="xs:boolean" />
+<xs:element name="bufferConstraints" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="location" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+\end{codeblock}
+\end{listing}
+
+\begin{listing}
+\caption{XML Schema dla pliku opisującego znalezione uszeregowanie.}
+\begin{codeblock}
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd"
+elementFormDefault="qualified"
+xmlns="http://tempuri.org/XMLSchema.xsd"
+xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="schedule">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="cmax" type="xs:double" />
+<xs:element name="actions">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="action" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="packID" type="xs:positiveInteger" />
+<xs:element name="packSize" type="xs:float" />
+<xs:element name="processor" type="xs:positiveInteger" />
+<xs:element name="direction">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="sending" />
+<xs:enumeration value="receipt" />
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" />
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+\end{codeblock}
+\end{listing}
