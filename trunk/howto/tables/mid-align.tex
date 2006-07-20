@@ -1,0 +1,32 @@
+
+\documentclass{article}
+
+\usepackage[OT4]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tabularx}
+
+\title{Pionowe środkowanie kolumn}
+\author{Dawid Weiss}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Przykład}
+
+Ogólnie to pionowe środkowanie kolumn nie jest zalecane, jeśli ktoś się jednak upiera, to:
+
+\begin{center}
+\begin{tabular}{| m{1cm} | @{} c @{} |}
+\hline
+A & \begin{tabular}{ c }
+    B \\ \hline
+    C
+    \end{tabular} \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
