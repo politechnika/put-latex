@@ -1,6 +1,6 @@
 %
 % This is a LaTeX class for master and bachelor theses following the guidelines
-% of Faculty of Computer Science and Management at Poznan University of technology.
+% of Faculty of Computer Science and Management at Poznan University of Technology.
 %
 % This class is UNOFFICIAL and NOT ENDORSED by the university.
 %
