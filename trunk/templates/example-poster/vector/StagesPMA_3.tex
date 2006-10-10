@@ -1,0 +1,56 @@
+	% The axes
+	\draw (0, 0) -- (8, 0) -- (8, 6) -- (0, 6) -- (0, 0);
+	% Description of the axes
+	\draw (4, -0.4) node[anchor=center] {satisfaction (max)};
+	\draw [rotate=90] (3, +0.4) node[anchor=center, rotate=90] {cost (min)};
+	% The randomly chosen direction of search
+	\draw[very thick, red, dashed] (0, 4) -- (8, 0);
+	% The current Pareto set
+	\begin{scope}[blue]
+	\filldraw (1, 0) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (1.25, 1) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (2, 2) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (2.25, 2.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	% \filldraw (3.5, 3.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm); % it is a parent of recombination
+	\filldraw (4.5, 4) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (5, 4.25) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (6, 4.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (7, 4.75) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (7.5, 5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\end{scope}
+	% The current set of solutions 
+	\begin{scope}[green]
+	\filldraw (0.5, 0.5) circle (0.1cm);
+	\filldraw (0.5, 2) circle (0.1cm);
+	\filldraw (1, 1.5) circle (0.1cm);
+	\filldraw (1.5, 2.5) circle (0.1cm);
+	\filldraw (2, 3.5) circle (0.1cm);
+	% \filldraw (2, 3) circle (0.1cm); % it is a parent of recombination
+	\filldraw (2.5, 4) circle (0.1cm);
+	\filldraw (3, 4) circle (0.1cm);
+	\filldraw (4, 4.5) circle (0.1cm);
+	\filldraw (4.5, 5) circle (0.1cm);
+	\filldraw (5.5, 5) circle (0.1cm);
+	\filldraw (6.5, 5.5) circle (0.1cm);
+	\filldraw (7, 5.5) circle (0.1cm);
+	\end{scope}
+	% The parents of recombination
+	\filldraw[red] (3.5, 3.5) node(parent1){} circle (0.15cm);
+	\filldraw[red] (2, 3) node(parent2){} circle (0.15cm);
+	% The offspring
+	\filldraw[black] (1.5, 4) node(offspring){} circle (0.15cm);
+	% Arrows from parents to the offspring
+	\begin{scope}[>= angle 60]
+	\draw[->, black, thick, dashed] (parent1) -- (offspring);
+	\draw[->, black, thick, dashed] (parent2) -- (offspring);
+	\end{scope}
+	% The ideal point
+	\draw (8, 0) node [above left=1pt, fill = white] {ideal point};
+	\filldraw[fill=black] (8, 0) circle (0.1cm);
+	% Legend
+	\filldraw[fill=white,draw=black] (0.1, 5.9) -- (3.0, 5.9) -- (3.0, 4.45) -- (0.1, 4.45) -- (0.1, 5.9); % the boundary
+	\draw (0.1, 5.9) node[anchor=north west] {parents of};
+	\draw (0.1, 5.45) node[anchor=north west] {recombination};
+	\filldraw[red] (2.7, 5.15) circle (0.15cm);
+	\draw (0.1, 5.0) node[anchor=north west] {the offspring};
+	\filldraw[black] (2.7, 4.7) circle (0.15cm);

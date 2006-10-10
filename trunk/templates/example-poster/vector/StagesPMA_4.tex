@@ -1,0 +1,52 @@
+	% The axes
+	\draw (0, 0) -- (8, 0) -- (8, 6) -- (0, 6) -- (0, 0);
+	% Description of the axes
+	\draw (4, -0.4) node[anchor=center] {satisfaction (max)};
+	\draw [rotate=90] (3, +0.4) node[anchor=center, rotate=90] {cost (min)};
+	% The randomly chosen direction of search
+	\draw[very thick, red, dashed] (0, 4) -- (8, 0);
+	% The current Pareto set
+	\begin{scope}[blue]
+	\filldraw (1, 0) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (1.25, 1) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (2, 2) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (2.25, 2.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (3.5, 3.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm); % it is a parent of recombination
+	\filldraw (4.5, 4) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (5, 4.25) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (6, 4.5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (7, 4.75) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw (7.5, 5) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\end{scope}
+	% The current set of solutions 
+	\begin{scope}[green]
+	\filldraw (0.5, 0.5) circle (0.1cm);
+	\filldraw (0.5, 2) circle (0.1cm);
+	\filldraw (1, 1.5) circle (0.1cm);
+	\filldraw (1.5, 2.5) circle (0.1cm);
+	\filldraw (2, 3.5) circle (0.1cm);
+	\filldraw (2, 3) circle (0.1cm); % it is a parent of recombination
+	\filldraw (2.5, 4) circle (0.1cm);
+	\filldraw (3, 4) circle (0.1cm);
+	\filldraw (4, 4.5) circle (0.1cm);
+	\filldraw (4.5, 5) circle (0.1cm);
+	\filldraw (5.5, 5) circle (0.1cm);
+	\filldraw (6.5, 5.5) circle (0.1cm);
+	\filldraw (7, 5.5) circle (0.1cm);
+	\end{scope}
+	% The offspring
+	\draw[black, thin] (1.5, 4) node(offspring){} circle (0.15cm);
+	% The offspring after LS
+	\filldraw[black] (4, 3) node(offspringAfterLS){} circle (0.15cm);
+	% The arrow from the offspring to the offspring after LS
+	\begin{scope}[>= angle 60]
+	\draw[dashed, thick, ->] (offspring) -- (offspringAfterLS);
+	\end{scope}
+	% The ideal point
+	\draw (8, 0) node [above left=1pt, fill = white] {ideal point};
+	\filldraw[fill=black] (8, 0) circle (0.1cm);
+	% Legend
+	\filldraw[fill=white,draw=black] (0.1, 5.9) -- (3.1, 5.9) -- (3.1, 4.9) -- (0.1, 4.9) -- (0.1, 5.9); % the boundary
+	\draw (0.1, 5.9) node[anchor=north west] {the offspring after};
+	\draw (0.1, 5.45) node[anchor=north west] {local search};
+	\filldraw[black] (2.7, 5.2) circle (0.15cm);

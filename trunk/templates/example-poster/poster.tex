@@ -1,0 +1,164 @@
+\documentclass[oneside,final,12pt]{article}
+
+\usepackage[utf8]{inputenc}	% input in UTF-8
+\usepackage[T1]{fontenc}
+\usepackage[math]{iwona}	% font of our choice
+
+\usepackage{tikz}	% drawing package
+\usepackage{pgflibrarysnakes,pgflibraryarrows}
+
+% define paper size
+\def\XMargin{1cm}
+\def\YMargin{1cm}
+\usepackage{geometry}
+\geometry{paper=a2paper,hmargin=\XMargin,vmargin=\YMargin}
+
+\usepackage{graphicx}	% to use imported graphics
+
+% textpos is for absolute positioning of boxes
+\usepackage{calc}
+\usepackage[absolute,overlay]{textpos}
+\TPGrid[\XMargin,\YMargin]{40}{57}
+\textblockorigin{0\TPHorizModule}{0\TPVertModule}
+
+\usepackage{fp}	% for arithmetic on plain numbers
+
+\pagestyle{empty}
+\parindent=0pt	% don't indent anything
+
+\newenvironment{mylist}{
+\begin{list}{\textbullet\hfill}{
+	\setlength{\labelwidth}{1.5ex}\setlength{\leftmargin}{\labelwidth+\labelsep}
+}}{\end{list}}
+
+\newcommand\showgrid{
+\begin{tikzpicture}[color=black!10]
+	\draw[loosely dotted,step=1cm,very thin,yshift=48\TPVertModule,yscale=-1] (0,0) grid (40,48);
+	\draw[step=5cm,yshift=48\TPVertModule,yscale=-1] (0,0) grid (40,48);
+\end{tikzpicture}
+}
+
+%    #1    #2    #3    #4      #5      #6
+% [title]{xpos}{ypos}{width}{height}{content}
+\newcommand{\posterbox}[6][\empty]{%
+	\posterfancybox[#1]{#2}{#3}{#4}{#5}{#6}{%
+	(0,0) -- (0pt,#5\TPVertModule) -- (#4\TPHorizModule,#5\TPVertModule) -- (#4\TPHorizModule,0pt) -- cycle;%
+	}%
+}
+
+\newlength\posterboxwidth
+\newlength\posterboxheight
+\newlength\posterboxtitlewidth
+\newlength\posterboxtitleheight
+
+%    #1    #2    #3    #4      #5      #6         #7
+% [title]{xpos}{ypos}{width}{height}{content}{fancyframe}
+\newcommand{\posterfancybox}[7][\empty]{%
+	\setlength{\posterboxwidth}{#4\TPHorizModule-4ex}
+	\setlength{\posterboxheight}{#5\TPVertModule}
+
+	\def\tmpa{\empty}
+	\def\tmpb{#1}
+	\ifx\tmpa\tmpb
+		% no title, assume 0pt height (for content spacing)
+		\setlength{\posterboxtitleheight}{0pt}
+	\else
+		% title
+		\settowidth{\posterboxtitlewidth}{\bf\large #1}
+		\settoheight{\posterboxtitleheight}{\bf\large #1}
+		\addtolength{\posterboxtitlewidth}{2ex}
+		\addtolength{\posterboxtitleheight}{1.8ex}
+		
+		\begin{textblock*}{\posterboxtitlewidth}(\XMargin+#2\TPHorizModule,\YMargin+#3\TPVertModule)%
+			\begin{tikzpicture}
+				\filldraw[use as bounding box,draw=\boxfrcolor,fill=\boxfrcolor,rounded corners=.5ex] (0,0) rectangle (\posterboxtitlewidth, \posterboxtitleheight);
+				\draw[color=\boxbgcolor] (1ex,\posterboxtitleheight - .9ex) node[below right,inner sep=0pt] {\bf\large #1};
+			\end{tikzpicture}%
+		\end{textblock*}%
+	\fi
+	
+	% content
+	\begin{textblock*}{#4\TPHorizModule-4ex}(\XMargin+#2\TPHorizModule+2ex,\YMargin+#3\TPVertModule+\posterboxtitleheight+1.5ex)%
+		\textblockorigin{\XMargin+#2\TPHorizModule+2ex}{\YMargin+#3\TPVertModule+\posterboxtitleheight+1.5ex}%
+		#6%
+	\end{textblock*}%
+	
+	% frame and background
+	\begin{textblock*}{#4\TPHorizModule}(\XMargin+#2\TPHorizModule,\YMargin+#3\TPVertModule)%
+		\begin{tikzpicture}
+			\filldraw [draw=\boxfrcolor,fill=\boxbgcolor,rounded corners=.5ex] #7
+		\end{tikzpicture}%
+	\end{textblock*}%
+}
+
+\newlength{\boxheight}
+\newlength{\boxwidth}
+\newcommand{\centerbox}[1]{%
+\settoheight{\boxheight}{#1}%
+\settowidth{\boxwidth}{#1}%
+\raisebox{\boxheight / -2}{#1}%
+}
+
+\begin{document}
+
+% enable grid mode (over the text)
+%\begin{textblock*}{0cm}(\XMargin,\YMargin)\showgrid\end{textblock*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% title and logo
+\newsavebox{\pplogobox}
+\newlength{\pplogowidth}
+\begin{textblock*}{0cm}(\TPHorizModule + 4ex,\TPVertModule * 175 / 100)
+\sbox{\pplogobox}{\includegraphics[height=3\TPVertModule]{logo_pp_crop}}%
+\settowidth{\pplogowidth}{\usebox{\pplogobox}}%
+\tikz \fill[white] (0,0) circle (\pplogowidth / 2);%
+\makebox[-\pplogowidth]{\usebox{\pplogobox}}
+\end{textblock*}
+
+\def\boxbgcolor{red!15}
+\def\boxfrcolor{black}
+\posterbox{0}{0}{40}{4.5}{%
+	\centering%
+	\Huge MULTIOBJECTIVE FUZZY APPROACH\\TO THE VEHICLE ROUTING PROBLEM WITH TIME WINDOWS\\[.5cm]%
+	\Large Przemysław Wesołek\hspace{2cm}Marek Kubiak\\[.3cm]%
+	\large Poznan University of Technology, Poznań, Poland%
+}
+
+% central box
+\def\boxbgcolor{white}
+\def\boxfrcolor{red!50}
+\posterbox[Main results]{9}{15}{22}{22}{\input{main}}
+
+% other boxes
+\def\boxbgcolor{white}
+\def\boxfrcolor{blue!50}
+
+% motivation box
+\posterbox[Motivation]{16}{6}{8}{8.5}{\input{motivation}}
+
+% FVRPTW box
+\posterfancybox[Fuzzy VRPTW]{0}{6}{15.5}{31}{\input{fvrptw}}{%
+(0,0) -- (0pt,31\TPVertModule) -- (15.5\TPHorizModule,31\TPVertModule) -- (15.5\TPHorizModule,22.5\TPVertModule) -- (8.5\TPHorizModule,22.5\TPVertModule) -- (8.5\TPHorizModule,0pt) -- cycle;
+}
+
+% PMA box
+\posterfancybox[Pareto Memetic Algorithm]{24.5}{6}{15.5}{31}{\input{pma}}{%
+(7\TPHorizModule,0pt) -- (7\TPHorizModule,22.5\TPVertModule) -- (0pt,22.5\TPVertModule) -- (0pt,31\TPVertModule) -- (15.5\TPHorizModule,31\TPVertModule) -- (15.5\TPHorizModule,0pt) -- cycle;
+}
+
+% additional conclusions box
+\posterbox[Additional conclusions]{0}{37.5}{40}{10}{\input{addconclusions}}
+
+% enable grid mode (under the text)
+%\begin{textblock*}{0cm}(\XMargin,\YMargin)\showgrid\end{textblock*}
+
+% background last
+\begin{textblock*}{\XMargin + 40\TPHorizModule + \XMargin}(0pt,0pt)%
+\begin{tikzpicture}
+	\fill[yellow!10] (0,0) rectangle (\XMargin + 40\TPHorizModule + \XMargin, \YMargin + 48\TPVertModule + \YMargin);
+	\draw[thin] (0,0) rectangle +(\XMargin + 40\TPHorizModule + \XMargin, \YMargin + 48\TPVertModule + \YMargin);
+\end{tikzpicture}
+\end{textblock*}
+
+\end{document}

@@ -1,0 +1,120 @@
+\begin{textblock*}{\posterboxwidth}(0cm,0cm)
+
+	\centering
+	\textbf{Service start times}\\[.5em]
+
+	\def\twindow{\draw (2,0) -- ++(0,1) -- ++(6,0) -- ++(2,-1);}
+
+	% FUZZY ROUTE
+	\def\xshift{12}
+	\def\xfirstshift{-5}
+	\FPeval{\xxshift}{clip(2*xshift)}
+	\FPeval{\xxxshift}{clip(3*xshift)}
+	\FPeval{\figwidth}{clip(-xfirstshift+3*xshift)}
+	\begin{tikzpicture}[x=\posterboxwidth / \figwidth,y=\posterboxheight / 15,join=round]
+	
+	\draw[->] (\xfirstshift,0) -- +(\figwidth,0) node[below left] {$t$};
+	
+	\twindow
+	\draw[red,very thick] (-4,0) -- ++(2,1) coordinate (A) -- ++(2,-1);
+	\draw[red,loosely dotted] (A.base) -- +(0,-1);
+	\draw[green,very thick] (2,0) -- +(0,1) -- +(0,0);
+	\draw (-3.5,0) node[below right,inner sep=0pt] {\parbox{\posterboxwidth * \xshift / \figwidth}{\begin{mylist}
+		\item arrival before time window
+		\item service starts at the beginning of time window
+	\end{mylist}}};
+	\begin{scope}[shift={(\xshift,0)}]
+	\twindow
+	\draw[red,very thick] (1,0) -- ++(1,0.5);
+	\draw[green,very thick] (2,0) -- ++(0,0.5) -- ++(1,0.5) coordinate (A) -- ++(2,-1);
+	\draw[green,loosely dotted] (A.base) -- +(0,-1);
+	\draw (-1.5,0) node[below right,inner sep=0pt] {\parbox{\posterboxwidth / \figwidth * \xshift}{\begin{mylist}
+		\item arrival during allowed time window
+		\item service start is ``clipped'' by the start of time window
+	\end{mylist}}};
+	\end{scope}
+	
+	\begin{scope}[shift={(\xxshift,0)}]
+	\twindow
+	\draw[green,very thick] (3,0) -- ++(2,1) coordinate (A) -- ++(2,-1);
+	\draw[green,loosely dotted] (A.base) -- +(0,-1);
+	\draw (0.5,0) node[below right,inner sep=0pt] {\parbox{\posterboxwidth / \figwidth * \xshift}{\begin{mylist}
+		\item arrival during allowed time window
+		\item service start = arrival time
+	\end{mylist}}};
+	\end{scope}
+	\end{tikzpicture}
+\end{textblock*}
+
+
+\begin{textblock*}{\posterboxwidth / 100 * 55 - 2ex}(0cm,\posterboxheight /4 - 2em)
+	\def\axis{
+		\draw[->] (0,0) -- (3.8,0) node[below left] {$t$};
+		\draw[->] (0,0) -- (0,1.5) node[below left] {$\mu(t)$};
+	}
+
+
+	% TIME WINDOWS
+	\centering
+	\textbf{Models of customer time window}\\[0.5em]
+	
+	\begin{tikzpicture}[x=\posterboxwidth / 2 / 5,y=\posterboxheight/2 / 7]
+	\def\yshift{-2}
+	\def\xdescdist{-0.8}
+	\FPmul{\yyshift}{2}{\yshift}
+
+	% fuzziness border
+	\draw[loosely dotted] (3,0) -- (3,\yyshift);
+	
+	% crisp case
+	\axis
+	\draw (1,0) -- (1,1) -- (3,1) -- (3,0);
+	\draw (2,1) node[above=2pt,font=\itshape,fill=white] { classical (``rigid'') };
+	
+	% fuzzy, tight case
+	\begin{scope}[shift={(0,\yshift)}]
+		\axis
+		\draw (1,0) -- (1,1) -- (2.5,1) -- (3,0);
+		\draw (2,1) node[above=2pt,font=\itshape,fill=white] { important (``tight'') };
+	\end{scope}
+	
+	% fuzzy, loose case
+	\begin{scope}[shift={(0,\yyshift)}]
+		\axis
+		\draw (1,0) -- (1,1) -- (3,1) -- (3.5,0);
+		\draw (2,1) node[above=2pt,font=\itshape,fill=white] { less important (``loose'') };
+	\end{scope}
+	
+	% side notes: cirsp and fuzzy
+	\FPadd\yboxlen{-\yshift}{1.5}
+	\FPeval\ytextpos{yshift * 2/3 - 0.75}
+	\draw[snake=brace, very thick, segment amplitude=.5em] (\xdescdist,0) -- +(0,1.5);
+	\draw[snake=brace, very thick, segment amplitude=.5em] (\xdescdist,\yyshift) -- +(0,\yboxlen);
+	
+	\FPadd{\xxdescdist}{\xdescdist}{-0.1}
+	\draw (\xxdescdist,0.75) node[above,rotate=90] {crisp model};
+	\draw (\xxdescdist,\ytextpos) node[above,rotate=90] {fuzzy model};
+	
+	\end{tikzpicture}\\[2em]
+	
+	
+	% TRAVEL TIMES
+	\textbf{Intuitive uncertain travel times}\\[0.5em]
+	
+	\begin{tikzpicture}[x=\posterboxwidth/3 / 5,y=\posterboxheight/2 / 7]
+	
+	\axis
+	\draw (0.5,0) node[below] {\vphantom{b}a} -- (1,1) -- (2,0) node[below] {\vphantom{b}c};
+	\draw[dotted] (1,0) node[below] {b} -- +(0,1);
+	
+	\draw (1.3,1.5) node[below right] {\parbox{\posterboxwidth / 3}{\raggedleft\itshape The travel is most
+		likely to take \textrm{b}, although it can last as long as \textrm{c};
+		however, sometimes \textrm{a} is enough.}};
+	\end{tikzpicture}\\[2em]
+	
+	\parbox{\posterboxwidth/3 * 13 / 10 + 2em}{The problem contains two objectives:
+	\begin{mylist}
+		\item maximization of satisfaction
+		\item minimization of cost
+	\end{mylist}}
+\end{textblock*}

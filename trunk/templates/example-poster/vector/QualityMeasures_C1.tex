@@ -1,0 +1,37 @@
+	% The grid
+	\draw[step=1cm, gray, dashed] (0, 0) grid (8, 6); % the grid
+	% The axes
+	\draw (0, 0) -- (8, 0) -- (8, 6) -- (0, 6) -- (0, 0);
+	% Description of the axes
+	\draw (4, -0.4) node[anchor=center] {satisfaction (max)};
+	\draw [rotate=90] (3, +0.4) node[anchor=center, rotate=90] {cost (min)};
+	% The ideal point
+	\draw (8, 0) node [above left=1pt, fill=white] {ideal point};
+	\filldraw[fill=black] (8, 0) circle (0.1cm);
+	% Pareto set A: circles
+	\filldraw[color=green] (0.5, 1.5) circle (0.1cm);
+	\filldraw[color=green] (1.5, 1.75) circle (0.1cm);
+	\filldraw[color=green] (2.5, 2) circle (0.1cm);
+	\filldraw[color=green] (3.5, 2.25) circle (0.1cm);
+	\filldraw[color=green] (4.5, 2.5) circle (0.1cm);
+	\filldraw[color=green] (5.5, 2.75) circle (0.1cm);
+	\filldraw[color=green] (6.5, 3) circle (0.1cm);
+	\filldraw[color=green] (7.5, 3.25) circle (0.1cm);
+	% Pareto set B: rectangles
+	\filldraw[color=red] (2.1, 0.29) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (2.8, 0.92) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (3.5, 1.55) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (4.2, 2.18) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (4.9, 2.81) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (5.6, 3.44) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (6.3, 4.07) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	\filldraw[color=red] (7, 4.7) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm);
+	% Legend
+	\filldraw[fill=white,draw=black] (0.1, 5.9) -- (1.1, 5.9) -- (1.1, 4.9) -- (0.1, 4.9) -- (0.1, 5.9); % the boundary
+	\draw (0.1, 5.9) node[anchor=north west] {A}; % the A items text
+	\filldraw[color=green] (0.7, 5.65) circle (0.1cm); % the A items label
+	\draw (0.1, 5.45) node[anchor=north west] {B}; % the B items text
+	\filldraw[color=red] (0.7, 5.2) ++(-0.1cm, -0.1cm) rectangle +(0.2cm, 0.2cm); % the B items label
+	% Description of the measure
+	\draw (4, 5.6) node[anchor=center, fill=white] {$C(A,B)=50\%$};
+	\draw (4, 5.15) node[anchor=center, fill=white] {$C(B,A)=50\%$};

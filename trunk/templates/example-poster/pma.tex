@@ -1,0 +1,54 @@
+\begin{textblock*}{\posterboxwidth}(0cm,0cm)
+\centering%
+\textbf{Main loop of the multiobjective evolutionary algorithm}\\[.5em]
+
+\def\figscale{.5}
+\def\figfontsize{\footnotesize}
+
+\newcommand\pmabox[1]{%
+\scalebox{\figscale}{%
+\begin{tikzpicture}[font=\figfontsize]
+\input{vector/StagesPMA_#1}
+\draw (7,1.5) node[font=\normalsize,draw,circle] {#1};
+\end{tikzpicture}}%
+}
+
+\newcommand\circled[1]{%
+\raisebox{-.5em}{\tikz \draw (0,0) node[circle,draw] {#1};}%
+}
+
+\begin{tabular}{ccc}
+\hspace{1em}\parbox[b]{4cm}{%
+\small%
+1. Choose a direction\\
+2. Choose parents\\
+3. Recombine\\
+4. Do local search\\
+5. Update Pareto set\\
+\vspace*{1.5ex}
+}&\pmabox{1}&\pmabox{2}\\
+\pmabox{3}&\pmabox{4}&\pmabox{5}
+\end{tabular}
+\end{textblock*}
+
+\begin{textblock*}{\posterboxwidth / 100 * 55 - 2ex}(\posterboxwidth / 100 * 45 + 2ex,\posterboxheight /4)
+\centering%
+\textbf{Achievement scalarizing functions}\\[.5em]
+
+\scalebox{.5}{%
+\begin{tikzpicture}[font=\small]
+\input{vector/AchievementScalarizingFunction}
+\end{tikzpicture}}\\[1em]
+
+\textbf{Local search: exchange of two customers}\\
+\includegraphics[width=\posterboxwidth / 100 * 55 - 5ex]{bitmap/customerExchangeExample}\\[1em]
+
+\textbf{Local search: relocation of a customer}\\
+\includegraphics[width=\posterboxwidth / 100 * 55 - 5ex]{bitmap/customerRelocateExample}\\[1em]
+
+\textbf{Route-based crossover}\\
+\includegraphics[width=\posterboxwidth / 100 * 55 - 5ex]{bitmap/CEPXExample}\\[1em]
+
+\textbf{Common edges preserving crossover}\\
+\includegraphics[width=\posterboxwidth / 100 * 55 - 5ex]{bitmap/RBXExample}\\[1em]
+\end{textblock*}

@@ -1,0 +1,38 @@
+	% The axes
+	\draw (0, 0) -- (8, 0) -- (8, 6) -- (0, 6) -- (0, 0);
+	% Description of the axes
+	\draw (4, -0.4) node[anchor=center] {satisfaction (max)};
+	\draw [rotate=90] (3, 0.4) node[anchor=center, rotate=90] {cost (min)};
+	% The Tchebycheff functions
+	\begin{scope}[red, very thick, dashed]
+	\draw (8, 0) -- (0, 1.2);
+	\draw (8, 0) -- (0, 3);
+	\draw (8, 0) -- (0, 6);
+	\draw (8, 0) -- (4, 6);
+	\draw (8, 0) -- (6.4, 6);
+	\end{scope}
+	% The Tchebycheff functions' whiskers
+	\begin{scope}[red, thin]
+	\filldraw (2.4, 0) -- (2.4, 0.84) circle (0.05cm) -- (8, 0.84);
+	\filldraw (3.4, 0) -- (3.4, 1.725) circle (0.05cm) -- (8, 1.725);
+	\filldraw (4.44, 0) --(4.44, 2.67) circle (0.05cm) -- (8, 2.67);
+	\filldraw (5.41, 0) -- (5.41, 3.88) circle (0.05cm) -- (8, 3.88);
+	\filldraw (6.4, 0 ) -- (6.4, 6) circle (0.05cm) -- (8, 6);
+	\end{scope}
+	% First series of points
+	\begin{scope}[blue]
+	\filldraw (2.4, 0.66) circle (0.1cm);
+	\filldraw (3.4, 1.14) circle (0.1cm);
+%	\filldraw (4.4, 1.8) circle (0.1cm); % the original point lying on a circle
+	\filldraw (4.2, 2.0) circle (0.1cm);
+	\filldraw (5.4, 2.67) circle (0.1cm);
+	\filldraw (6.4, 4.2) circle (0.1cm);
+	\end{scope}
+	% The ideal point
+	\draw (8, 0) node [above left=1pt, fill = white] {ideal point};
+	\filldraw[fill=black] (8, 0) circle (0.1cm);
+	% Legend
+	\filldraw[fill=white,draw=black] (0.1, 5.9) -- (2.7, 5.9) -- (2.7, 4.9) -- (0.1, 4.9) -- (0.1, 5.9); % the boundary
+	\draw (0.1, 5.9) node[anchor=north west] {nondominated}; % first function text
+	\draw (0.1, 5.45) node[anchor=north west] {solutions A}; % second function text
+	\filldraw[blue] (2.3, 5.2) circle (0.1cm); % first function line
