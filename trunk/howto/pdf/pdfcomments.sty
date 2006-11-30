@@ -1,0 +1,17 @@
+
+%
+% A simple style for embedding PDF comments (use pdflatex for processing). 
+%
+
+\newcommand{\pdfnote}[1]{%
+  \pdfstringdef{\tmptext}{#1}%
+  \pdfannot{/Subtype /Text /C [1 1 0] /Contents (\tmptext)}%
+}
+
+\newcommand{\sidepdfnote}[1]{%
+  \pdfstringdef{\tmptext}{#1}%
+  \marginpar{\pdfannot{/Subtype /Text /C [1 1 0] /Contents (\tmptext)}}%
+}
+
+\newcommand{\pdfcomment}[1]{\pdfnote{#1}}
+\newcommand{\sidepdfcomment}[1]{\sidepdfnote{#1}}
