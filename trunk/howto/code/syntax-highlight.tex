@@ -1,0 +1,49 @@
+\documentclass[polish]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{fancyvrb}
+\usepackage{varioref}
+\usepackage{tocloft}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{luximono}
+
+\definecolor{codestrings}{rgb}{0.164,0,1}
+\definecolor{codecomment}{rgb}{0.25,0.49,0.37}
+\definecolor{codekeywords}{rgb}{0.49,0,0.33}
+
+% 0.25,0.37,0.75 ; blue
+
+\usepackage{listings}
+\lstset{
+	inputencoding=utf8,
+	language=Java,
+	extendedchars=true,
+	basicstyle=\ttfamily\scriptsize,
+	numbers=left,
+	numberstyle=\tiny,
+	tabsize=2,
+	showstringspaces=false,
+	showspaces=false,
+        keywordstyle=\bfseries\color{codekeywords},
+        identifierstyle=\color{black},
+        stringstyle=\color{codestrings},
+        commentstyle=\color{codecomment},
+        columns=fullflexible,
+        abovecaptionskip=\medskipamount,
+        belowcaptionskip=\medskipamount,
+}
+
+\begin{document}
+
+\noindent
+An example of the \texttt{listings} package. Note how certain
+keywords are emphasized.
+
+\lstinputlisting[emph={Arrays,asList},emphstyle={\color{red}}]{Example.java}
+
+\noindent
+
+\end{document}
