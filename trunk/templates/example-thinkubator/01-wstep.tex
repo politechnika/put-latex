@@ -1,0 +1,155 @@
+
+\chapter{Wstęp}
+Realizacja niniejszej pracy inżynierskiej została rozpoczęta w~grudniu 2005 roku
+jako projekt w~konkursie
+\akronim{\htmladdnormallink{CSIDC}{http://computer.org/csidc}}
+(\english{Computer Society International Design Competition}). Organizatorem
+konkursu jest Towarzystwo Komputerowe przy amerykańskim Instytucie Inżynierii
+Elektrotechnicznej i~Elektronicznej (\english{IEEE Computer Society}). Konkurs
+ten zachęca studentów do pracy w~zespole w~celu stworzenia opartego na
+wykorzystaniu komputerów rozwiązania dla wybranego problemu. Zadaniem studentów
+jest zaprojektowanie, wykonanie, przetestowanie, udokumentowanie, a~nawet
+sprzedanie wynalezionego przez nich systemu. Konkurs rozgrywany jest w~trzech
+etapach. W~pierwszym etapie studenci analizują zadany temat, wybierają problem i
+zgłaszają temat pracy. Ze wszystkich zgłoszeń wybieranych jest 300 drużyn, które
+przystępują do zgłębienia problemu i~przygotowują plan realizacji projektu.
+Rezultatem jest raport wstępny (\english{Interim Report}), na podstawie którego
+100 najlepszych drużyn kwalifikuje się do trzeciego etapu. Następnie zespoły te
+realizują zaplanowane prace i~przygotowują raport finałowy (\english{Final
+Report}). Autorzy dziesięciu najlepszych prac są zapraszani na finały do
+Waszyngtonu, D.C., gdzie zespoły prezentują swoje projekty. Na podstawie
+prezentacji i~raportu finałowego wybierani są zwycięzcy konkursu. Temat
+\akronim{CSIDC} w~2006 roku brzmiał: ,,Preserving, Protecting and Enhancing the
+Environment'', czyli w~wolnym tłumaczeniu ,,Podtrzymywanie, Ochrona i~Ulepszanie
+Środowiska''. Niniejszy projekt został zakwalifikowany do III etapu konkursu,
+a~następnie był rozwijany i~doczekał się obecnej formy pracy inżynierskiej.
+
+Szeroko pojęta ochrona środowiska kojarzona jest zazwyczaj z~zanieczyszczeniami
+środowiska (powietrza, wody lub gleby) czy globalnym ociepleniem. Do kwestii
+wymierania gatunków przywiązuje się wagę dużo mniejszą, podczas gdy niezmiernie
+istotne jest to, że spośród wielu codziennie wymierających gatunków każdy
+ewoluował do obecnej postaci miliony lat i~ma wielki wpływ na równowagę swojego
+ekosystemu. Pomoc w~przetrwaniu chociaż jednego gatunku wnosi istotny wkład
+w~ochronę środowiska.
+
+Inspiracją do napisania niniejszej pracy były rozmowy z~pracownikami Poznańskiego
+Nowego Zoo. Dyrektor do spraw hodowli tego ogrodu, dr~inż.~Radosław Ratajszczak,
+opowiedział o~następujących wydarzeniach:
+\begin{quote}
+	 W~1974 roku światowa populacja jednej z~odmian pustułki (łac. \emph{mauritius
+	 kestrel}) liczyła 10~sztuk, wśród których były tylko 2~samice. Wszystkie
+	 ptaki żyły w~niewoli -- gatunek był bardzo bliski wymarcia. Minęły dwa lata
+	 zanim jedna z~samic złożyła jedno jajo. Zostało ono wzięte do inkubatora, by
+	 zapewnić mu przetrwanie. Inkubacja się udała, pisklę się wykluło, ale
+	 wydarzył się straszny wypadek: eter, który był używany w~czujniku inkubatora
+	 wyciekł i~zatruł pisklę. Jak widać, bezsensowny wypadek o~mały włos nie
+	 doprowadził do wyginięcia gatunku.
+\end{quote}
+Na szczęście pustułki nie wymarły, a~ich dzisiejsza populacja oceniana jest
+na~ok.~150 sztuk. Mimo to ta historia powinna być traktowana jako
+ostrzeżenie, bo podobny wypadek w~przyszłości może mieć fatalne konsekwencje.
+
+Inkubacja zagrożonych gatunków jest bardzo trudnym zadaniem i~wymaga
+odpowiednich narzędzi. Analiza problemu wykazała że~istniejące inkubatory
+zapewniają tylko podstawową funkcjonalność, niewystarczającą dla wielu
+gatunków, a~także że brakuje inkubatorów ułatwiających prowadzenie badań
+naukowych. Podstawowa funkcjonalność której oczekują ornitolodzy to możliwość
+analizy przebiegu inkubacji (zapisywanie stanu inkubatora i~możliwość jego
+wizualizacji) czy też programowalność (możliwość zaprogramowania zmiany
+parametrów inkubacji w~czasie). Dodatkowo pożądana była możliwość zbierania
+i~analizowania danych z~wielu inkubatorów.
+
+Powyższe przemyślenia zainspirowały autorów niniejszej pracy do stworzenia
+Thinkubatora -- systemu umożliwiającego inkubację ptasich jaj w~kontrolowanym
+i~nadzorowanym środowisku, który może zrewolucjonizować podejście do inkubacji.
+W~centrum systemu znajduje się wysokiej jakości inkubator. Jest on wyposażony
+w~komputer przemysłowy z~interfejsem ethernetowym umożliwiającym komunikację ze
+Stacją Kontrolną -- aplikacją zainstalowaną na~komputerze klasy PC umożliwiającą
+bezpośrednią interakcję z~inkubatorami. Za pomocą Stacji Kontrolnej można
+programować i~nadzorować wiele inkubatorów -- oszczędza się dzięki temu czas
+potrzebny na programowanie wielu urządzeń. Stacja Kontrolna umożliwia także
+zapisywanie informacji o~stanie inkubacji w~celu ich wizualizacji lub do
+późniejszej analizy. Cały system jest zintegrowany ze zdalnym serwerem --
+Centrum Nadzoru. Serwer zbiera dane z~wszystkich inkubatorów umożliwiając
+zaawansowaną analizę statystyczną lub analizę przy pomocy algorytmów wspomagania
+decyzji. Umożliwia on także wymianę informacji pomiędzy użytkownikami na całym
+świecie. Posiada również funkcję wizualizacji danych, która pozwala na
+współdzielenie wiedzy o~ptakach pomiędzy profesjonalistami a~hobbistami i~jej
+poszerzanie.
+
+Ornitolodzy z~Zoo w~Poznaniu uważają, że system o~takich parametrach jest
+wysoce pożądany. Analiza kosztów, zalet i~wad tego systemu pokazała, że mógłby
+on zostać bez problemu wdrożony w~wielu ogrodach zoologicznych na świecie.
+
+Pomimo dużej funkcjonalności i~zastosowania wielu przydatnych rozwiązań koszt
+urządzenia wraz z~wdrożeniem byłby niższy niż koszt wdrożenia zwykłego
+inkubatora o~podobnych parametrach.
+
+W realizacji projektu brały udział cztery osoby. Tabela \ref{tab:Podzial}
+przedstawia zadania wykonane przez każdą z nich.
+
+Struktura pracy jest następująca. W~rozdziale~\ref{sec:CeliZakres} opisano
+obecny stan wiedzy na temat inkubacji ptasich jaj, stosowane rozwiązania
+w~komercyjnych inkubatorach oraz dokładnie zdefiniowano cel projektu.
+W~rozdziale~\ref{sec:Architektura} opisano architekturę systemu Thinkubator.
+Jest on podzielony na cztery podrozdziały, opisujące realizację poszczególnych
+elementów systemu oraz zastosowane metody komunikacji między nimi.
+W~rozdziale~\ref{sec:Praktyka} opisano przykładowy scenariusz użycia systemu
+wraz z~krókim opisem interfejsu użytkownika. Praca zakończona jest krótkim
+podsumowaniem w~rozdziale~\ref{sec:Podsumowanie}.
+
+\begin{table}[b]
+	\centering
+	\begin{tabular}{|m{6cm}|c|c|c|c|}\hline
+		\bfseries Czynność & \bfseries Janusz & \bfseries Paweł & \bfseries Tomasz &
+		\bfseries Szymon \\
+		& \bfseries Bossy & \bfseries Lubarski & \bfseries Nowak & \bfseries
+		Szafraniec \\\hline
+		\multicolumn{5}{|c|}{\bfseries Budowa inkubatora} \\\hline
+		Wysokopoziomowy projekt inkubatora & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ & $\checkmark$ \\\hline
+		Projekt wymiennika ciepła & $\checkmark$ & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ \\\hline
+		Wykonanie wymiennika ciepła & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Wykonanie konstrukcji zewnętrznej & $\checkmark$ & $\checkmark$ & &
+		$\checkmark$ \\\hline
+		Projekt komory inkubacyjnej & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Montaż elektroniki & $\checkmark$ & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ \\\hline 
+		Wykonanie elektroniki peryferyjnej & & & $\checkmark$ & \\\hline
+		Montaż inkubatora & $\checkmark$ & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ \\\hline 
+		\multicolumn{5}{|c|}{\bfseries Oprogramowanie inkubatora} \\\hline
+		Projekt wysokopoziomowy & $\checkmark$ & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ \\\hline 
+		Implementacja jądra systemu & $\checkmark$ & & & \\\hline
+		Projekt algorytmów sterowania & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Implementacja algorytmów sterowania & $\checkmark$ & $\checkmark$ & &
+		$\checkmark$ \\\hline
+		Kalibracja algorytmów sterowania & $\checkmark$ & $\checkmark$ & &
+		$\checkmark$ \\\hline
+		Oprogramowanie UI & & & $\checkmark$ & \\\hline
+		Uruchomienie \emph{SBC} & $\checkmark$ & $\checkmark$ & $\checkmark$ &
+		$\checkmark$ \\\hline
+		Implementacja algorytmów komunikacji & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		\multicolumn{5}{|c|}{\bfseries Stacja Kontrolna} \\\hline
+		Projekt wysokopoziomowy & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Implementacja & $\checkmark$ & & & $\checkmark$ \\\hline
+		Implementacja algorytmów komunikacji & $\checkmark$ & & & $\checkmark$
+		\\\hline
+		\multicolumn{5}{|c|}{\bfseries Centrum Nadzoru} \\\hline
+		Projekt wysokopoziomowy &		$\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Implementacja UI & & $\checkmark$ & & \\\hline
+		Projekt schematu bazy danych & $\checkmark$ & $\checkmark$ & & $\checkmark$
+		\\\hline
+		Implementacja algorytmów komunikacji & & $\checkmark$ & & \\\hline
+	\end{tabular}
+	\caption{Podział prac}
+	\label{tab:Podzial}
+\end{table}
