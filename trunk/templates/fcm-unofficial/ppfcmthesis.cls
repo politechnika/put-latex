@@ -4,18 +4,25 @@
 %
 % This class is UNOFFICIAL and NOT ENDORSED by the university.
 %
-% (c) 2006 Dawid Weiss
+% (c) 2006--2007 Dawid Weiss
 % Poznan University of Technology
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2006/07/18 v0.93 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2007/02/18 v0.94 PP FCM thesis class]
 
+% v.0.94 Added "bachelor" option for bachelor theses. 
 % v.0.93 Varioref is loaded prior to hyperref.
+
+% Declare bachelor thesis switch.
+\newif\if@ppbachelor\@ppbachelorfalse
 
 %
 % Declare default options and load base package (memoir).
 %
+\DeclareOption{bachelor}
+   {\@ppbachelortrue}
+
 \ExecuteOptions{a4paper,pl,11pt,oneside,final}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax
@@ -99,8 +106,15 @@ Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut I
 Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
 \fi\end{center}}
 
-\pretitle{\vspace{2cm}\begin{center}\if@pppolish Praca dyplomowa magisterska\else Master's thesis\fi\par\vspace{1cm}\Large\bfseries\MakeUppercase}
+\pretitle{\vspace{2cm}\begin{center}%
+\if@pppolish%
+\if@ppbachelor Praca dyplomowa in{\.z}ynierska\else Praca dyplomowa magisterska\fi
+\else
+\if@ppbachelor Bachelor's thesis\else Master's thesis\fi
+\fi\par\vspace{1cm}\Large\bfseries\MakeUppercase}
 \posttitle{\end{center}}
+
+\renewcommand{\and}{\\}
 
 \renewcommand{\maketitlehookb}{\vspace{1cm}}
 
@@ -116,12 +130,13 @@ Supervisor\\\@ppsupervisor
 %
 % Define colophon 
 %
-\newcommand{\ppcolophon}{
+\newcommand{\ppcolophon}{%
+\renewcommand{\and}{\unskip{}, }%
 \cleardoublepage\thispagestyle{empty}\vspace*{\fill}%
 \footnotesize\singlespacing\noindent%
 \raisebox{-1.3cm}{\includegraphics[height=1.5cm]{figures/template/logo-pp}}%
 \hspace{1.5em}%
-\begin{minipage}[t]{10cm}%
+\begin{minipage}[t]{11cm}%
 \vglue 0pt\copyright{} \@ppyear\ \@author
 
 \medskip\noindent%
