@@ -114,6 +114,7 @@ Poznan University of Technology\\Faculty of Computer Science and Management\\Ins
 \fi\par\vspace{1cm}\Large\bfseries\MakeUppercase}
 \posttitle{\end{center}}
 
+\newcommand{\album}[1]{\unskip ,~#1}
 \renewcommand{\and}{\\}
 
 \renewcommand{\maketitlehookb}{\vspace{1cm}}
@@ -132,6 +133,7 @@ Supervisor\\\@ppsupervisor
 %
 \newcommand{\ppcolophon}{%
 \renewcommand{\and}{\unskip{}, }%
+\renewcommand{\album}[1]{\unskip}%
 \cleardoublepage\thispagestyle{empty}\vspace*{\fill}%
 \footnotesize\singlespacing\noindent%
 \raisebox{-1.3cm}{\includegraphics[height=1.5cm]{figures/template/logo-pp}}%
@@ -149,11 +151,12 @@ Poznan University of Technology\\Faculty of Computer Science and Management\\Ins
 
 \medskip\noindent%
 \if@pppolish%
-Sk{\l}ad przy u{\.z}yciu systemu \LaTeX\ i czcionki Computer Modern.
+Sk{\l}ad przy u{\.z}yciu systemu \LaTeX{}.
 \else%
 Typeset using \LaTeX\ in Computer Modern.
 \fi
 
+\renewcommand{\and}{\unskip{} $\backslash$and }%
 \medskip\noindent Bib\TeX{}:\\[1ex]
 \tiny\texttt{%
 @mastersthesis\{ key,\\
