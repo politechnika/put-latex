@@ -77,8 +77,13 @@
 \RecustomVerbatimEnvironment{Verbatim}{Verbatim}%
     {fontsize=\footnotesize,frame=lines,numbers=left}
 
+\newlength{\codemargin}
+\setlength{\codemargin}{\leftmargin}
+\addtolength{\codemargin}{2pt}
+
 \lstnewenvironment{javablock}{\lstset{language=Java}}{}
 \lstnewenvironment{ljavablock}{\lstset{language=Java,resetmargins=true}}{}
+\lstnewenvironment{mjavablock}{\lstset{language=Java,xleftmargin=\codemargin,numbers=none,framexleftmargin=2pt,numbersep=0pt}}{}
 
 \newfloat{Program}{tbp}{lst}
 
@@ -144,5 +149,24 @@ public final class Example {
 \end{ljavablock}
 	\end{itemize}
 \end{itemize}
+
+\pagebreak
+\bigskip\noindent%
+Now, if we want an arbitrary horizontal indent, we can specify that as well. For example, to
+indent code blocks \emph{exactly} the amount of a typical list environment, you would do this:
+
+\begin{itemize}
+	\item Here is a list indent. The code below is not in the list, yet it appears
+	exactly at the same distance from the left page margin.
+\end{itemize}
+
+\noindent\hspace{\leftmargin}\raisebox{0pt}[0pt][0pt]{\rule{0.5pt}{50pt}}
+
+\begin{mjavablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{mjavablock}
 
 \end{document}
