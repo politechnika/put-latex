@@ -1,0 +1,148 @@
+\documentclass[polish]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+
+\usepackage[polish]{babel}
+
+\usepackage[widespace]{fourier}
+\usepackage[scaled]{luximono}
+
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[bookmarks=true,unicode]{hyperref}
+\usepackage{url}
+\usepackage{varioref}
+\usepackage{listings}
+
+% Custom floats
+\usepackage{tocloft}
+\usepackage{float}
+
+% Set up hyperref.
+\hypersetup{
+  bookmarksopen=false,
+  bookmarksopenlevel=3,
+  bookmarksnumbered=true,
+%
+  colorlinks=false,
+  citebordercolor=0.64 0.68 0.86,
+  filebordercolor=0.64 0.68 0.86,
+  linkbordercolor=0.64 0.68 0.86,
+  menubordercolor=0.64 0.68 0.86,
+  pagebordercolor=0.64 0.68 0.86,
+  urlbordercolor=0.64 0.68 0.86,
+  runbordercolor=0.64 0.68 0.86,
+%
+  pdfpagemode=UseOutlines,
+  pdfstartview=Fit,
+%
+  pdftitle={},
+  pdfauthor={},
+  pdfkeywords={}
+}
+
+% Define colors for listings.
+\definecolor{codestrings}{rgb}{0.164,0,1}
+\definecolor{codecomment}{rgb}{0.25,0.49,0.37}
+\definecolor{codekeywords}{rgb}{0.49,0,0.33}
+\definecolor{codebackground}{rgb}{0.95,0.95,0.95}
+
+% Set up defaults
+\lstset{
+	inputencoding=utf8,
+	language=Java,
+	extendedchars=true,
+	basicstyle=\ttfamily\scriptsize,
+	numbers=left,
+  numbersep=3pt,
+	framexleftmargin=2pt,
+  framerule=0pt,
+  frame=lines,
+	numberstyle=\tiny,
+	tabsize=2,
+	showstringspaces=false,
+	showspaces=false,
+  keywordstyle=\bfseries\color{codekeywords},
+  identifierstyle=\color{black},
+  stringstyle=\color{codestrings},
+  commentstyle=\color{codecomment},
+  columns=fullflexible,
+  abovecaptionskip=\medskipamount,
+  belowcaptionskip=\medskipamount,
+  backgroundcolor=\color{codebackground},  
+}
+
+\RecustomVerbatimEnvironment{Verbatim}{Verbatim}%
+    {fontsize=\footnotesize,frame=lines,numbers=left}
+
+\lstnewenvironment{javablock}{\lstset{language=Java}}{}
+\lstnewenvironment{ljavablock}{\lstset{language=Java,resetmargins=true}}{}
+
+\newfloat{Program}{tbp}{lst}
+
+\begin{document}
+
+\noindent%
+An example on the `top' level:
+
+\begin{javablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{javablock}
+
+\begin{itemize}
+	\item And now indented:
+\begin{javablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{javablock}
+
+	\begin{itemize}
+		\item And indented again:
+\begin{javablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{javablock}
+	\end{itemize}
+\end{itemize}
+
+\bigskip\noindent%
+And now not indented (note it is the same option for \texttt{fancyvrb} and \texttt{listings} -- \texttt{resetmargins}).
+An example on the `top' level:
+
+\begin{ljavablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{ljavablock}
+
+\begin{itemize}
+	\item And now indented:
+\begin{ljavablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{ljavablock}
+
+	\begin{itemize}
+		\item And indented again:
+\begin{ljavablock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{ljavablock}
+	\end{itemize}
+\end{itemize}
+
+\end{document}
