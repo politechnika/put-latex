@@ -1,0 +1,126 @@
+
+\documentclass[polish]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT1]{fontenc}
+
+\usepackage{xcolor}
+\usepackage[bookmarks=true,unicode]{hyperref}
+\usepackage{url}
+\usepackage{listings}
+
+% Set up hyperref.
+\hypersetup{
+  bookmarksopen=false,
+  bookmarksopenlevel=3,
+  bookmarksnumbered=true,
+%
+  colorlinks=false,
+  citebordercolor=0.64 0.68 0.86,
+  filebordercolor=0.64 0.68 0.86,
+  linkbordercolor=0.64 0.68 0.86,
+  menubordercolor=0.64 0.68 0.86,
+  pagebordercolor=0.64 0.68 0.86,
+  urlbordercolor=0.64 0.68 0.86,
+  runbordercolor=0.64 0.68 0.86,
+%
+  pdfpagemode=UseOutlines,
+  pdfstartview=Fit,
+%
+  pdftitle={},
+  pdfauthor={},
+  pdfkeywords={}
+}
+
+% Define colors for listings.
+\definecolor{codestrings}{rgb}{0.164,0,1}
+\definecolor{codecomment}{rgb}{0.25,0.49,0.37}
+\definecolor{codekeywords}{rgb}{0.49,0,0.33}
+\definecolor{codebackground}{rgb}{0.95,0.95,0.95}
+
+% Set up defaults
+\lstset{
+	inputencoding=utf8,
+	language=Java,
+	extendedchars=true,
+	basicstyle=\ttfamily\scriptsize,
+	numbers=none,
+	numbersep=0pt,
+	framexleftmargin=0pt,
+	framerule=0pt,
+	frame=lines,
+	numberstyle=\tiny,
+	tabsize=2,
+	showstringspaces=false,
+	showspaces=false,
+	keywordstyle=\bfseries\color{codekeywords},
+	identifierstyle=\color{black},
+	stringstyle=\color{codestrings},
+	commentstyle=\color{codecomment},
+	columns=fullflexible,
+	abovecaptionskip=\medskipamount,
+	belowcaptionskip=\medskipamount,
+	backgroundcolor=\color{codebackground},
+}
+
+
+\newlength{\codemargin}
+
+\makeatletter%
+\def\resetmargin{%
+\advance\@itemdepth by 1%
+\edef\@codemargin{leftmargin\romannumeral\the\@itemdepth}%
+\advance\@itemdepth by -1%
+\setlength{\codemargin}{\csname\@codemargin\endcsname}}
+\makeatother%
+
+\lstnewenvironment{codeblock}{\resetmargin\lstset{language=Java,xleftmargin=\codemargin,numbers=none}}{}
+
+\begin{document}
+
+% 
+% Unindented.
+%
+\noindent Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+\begin{codeblock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{codeblock}
+
+
+\begin{itemize}
+	\item Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+\begin{codeblock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{codeblock}
+
+	\begin{itemize}
+		\item Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+\begin{codeblock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{codeblock}
+
+		\begin{itemize}
+			\item Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+\begin{codeblock}
+public final class Example {
+	public static void main(String [] args) {
+	}
+}
+\end{codeblock}
+
+			\begin{itemize}
+				\item Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard  dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\end{document}
