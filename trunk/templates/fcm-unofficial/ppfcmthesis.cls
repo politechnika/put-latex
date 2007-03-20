@@ -11,6 +11,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{ppfcmthesis}[2007/02/18 v0.94 PP FCM thesis class]
 
+% v.0.95 Fix for setspace package emulated by memoir, causing exceptions in MikTeX 2.5  
 % v.0.94 Added "bachelor" option for bachelor theses. 
 % v.0.93 Varioref is loaded prior to hyperref.
 
@@ -43,9 +44,9 @@
 \selectlanguage{english}
 \fi
 
+\RequirePackage{graphicx}
 \RequirePackage{setspace}
 \RequirePackage{booktabs}
-\RequirePackage{graphicx}
 
 \ifpdf
 	\DeclareGraphicsExtensions{.pdf,.png,.jpg}
@@ -135,7 +136,7 @@ Supervisor\\\@ppsupervisor
 \renewcommand{\and}{\unskip{}, }%
 \renewcommand{\album}[1]{\unskip}%
 \cleardoublepage\thispagestyle{empty}\vspace*{\fill}%
-\footnotesize\singlespacing\noindent%
+\footnotesize\SingleSpacing\noindent%
 \raisebox{-1.3cm}{\includegraphics[height=1.5cm]{figures/template/logo-pp}}%
 \hspace{1.5em}%
 \begin{minipage}[t]{11cm}%
@@ -216,7 +217,7 @@ Typeset using \LaTeX\ in Computer Modern.
 \setmarginnotes{6pt}{50pt}{\onelineskip}
 \setheadfoot{\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{2\onelineskip}{*}
-\onehalfspacing
+\OnehalfSpacing
 
 \changecaptionwidth
 \captionwidth{.9\linewidth}
@@ -256,4 +257,3 @@ Typeset using \LaTeX\ in Computer Modern.
 
 % Table head
 \newcolumntype{L}{c}\newcommand{\tabhead}[1]{\multicolumn{1}{L}{#1}}
-
