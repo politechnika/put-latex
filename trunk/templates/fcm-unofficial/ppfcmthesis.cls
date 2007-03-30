@@ -9,7 +9,7 @@
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2007/02/18 v0.94 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2007/03/30 v0.96 PP FCM thesis class]
 
 % v.0.96 Fix for setspace package: emulation of new memoir commands for older memoir packages (tetex).
 % v.0.95 Fix for setspace package emulated by memoir, causing exceptions in MikTeX 2.5  
