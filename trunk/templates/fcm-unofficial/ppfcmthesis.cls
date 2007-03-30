@@ -11,6 +11,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{ppfcmthesis}[2007/02/18 v0.94 PP FCM thesis class]
 
+% v.0.96 Fix for setspace package: emulation of new memoir commands for older memoir packages (tetex).
 % v.0.95 Fix for setspace package emulated by memoir, causing exceptions in MikTeX 2.5  
 % v.0.94 Added "bachelor" option for bachelor theses. 
 % v.0.93 Varioref is loaded prior to hyperref.
@@ -88,6 +89,17 @@
     pdfkeywords={}
 }
 \RequirePackage{memhfixc}
+
+%
+% Emulate setspace package for older versions of memoir.
+%
+\ifx\undefined\SingleSpacing
+\RequirePackage{setspace}
+\newcommand{\SingleSpacing}{\singlespacing}
+\fi
+\ifx\undefined\OnehalfSpacing
+\newcommand{\OnehalfSpacing}{\onehalfspacing}
+\fi
 
 %
 % Customize title page
