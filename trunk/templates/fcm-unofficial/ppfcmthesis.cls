@@ -1,6 +1,6 @@
 %
 % This is a LaTeX class for master and bachelor theses following the guidelines
-% of Faculty of Computer Science and Management at Poznan University of Technology.
+% of Faculty of Computing Science and Management at Poznan University of Technology.
 %
 % This class is UNOFFICIAL and NOT ENDORSED by the university.
 %
@@ -116,7 +116,7 @@
 \if@pppolish
 Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
 \else
-Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
+Poznan University of Technology\\Faculty of Computing Science and Management\\Institute of Computing Science
 \fi\end{center}}
 
 \pretitle{\vspace{2cm}\begin{center}%
@@ -159,7 +159,7 @@ Supervisor\\\@ppsupervisor
 Instytut Informatyki, Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\%
 Politechnika Pozna\'nska%
 \else%
-Poznan University of Technology\\Faculty of Computer Science and Management\\Institute of Computer Science
+Poznan University of Technology\\Faculty of Computing Science and Management\\Institute of Computing Science
 \fi
 
 \medskip\noindent%
