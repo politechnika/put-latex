@@ -1,0 +1,201 @@
+\documentclass[12pt]{beamer}
+\usepackage{clock}
+
+\usetheme{Madrid}
+
+
+\title[A clock in beamer]{An example of using Clock in beamer}
+\author{Luis R\'{a}ndez \& Juan I. Montijano}
+\institute[IUMA]{IUMA \\ Universidad de Zaragoza }
+\date{\today}
+
+
+\begin{document}
+
+
+\frame{\titlepage}
+
+%\frame{\tableofcontents}
+
+\begin{frame}[t]
+
+\frametitle{Introduction}
+
+
+%\clockfont{"font.HelvB"}
+\clockfont{"font.Helv"}
+\initclock  % This must be used one time to initialize the clock
+
+We are putting here a clock with the macro  \quad
+\structure{\texttt{$\backslash$insertclock}}
+
+\medskip
+
+The default settings are used:  \insertclock
+
+\medskip
+
+Before that, the macro \quad  \structure{\texttt{$\backslash$initclock}}
+\quad must have been used (only one time !).
+
+\end{frame}
+
+\begin{frame}
+The font type can be specified, just before initializing the clock, with the macro
+\   \structure{\texttt{$\backslash$clockfont\{``font''\}}} \
+where ``font'' is one of the adobe known fonts, given in keywords column in the next table
+
+\begin{center}
+{\footnotesize
+\begin{tabular}{ll}
+Text Font & Keyword  \\
+\hline
+Times-Roman  & font.Times \\
+Times-Bold  & font.TimesB \\
+Times-Italic  & font.TimesI \\
+Times-BoldItalic  & font.TimesBI \\
+Helvetica & font.Helv \\
+Helvetica-Bold & font.HelvB \\
+Helvetica-Oblique & font.HelvI \\
+Helvetica-BoldOblique & font.HelvBI \\
+Courier & font.Cour \\
+Courier-Bold & font.CourB \\
+Courier-Oblique & font.CourI \\
+Courier-BoldOblique & font.CourBI \\
+Symbol & font.Symbol \\
+ZapfDingbats & font.ZapfD  \\
+\end{tabular}
+}
+\end{center}
+
+\end{frame}
+
+% This is an example for inserting
+% the clock at the place reserved to the date, the foot line in the
+% case of Madrid theme.
+%  Colors are adjusted according the theme.
+%
+\date{\raisebox{-1.8pt}\insertclock}
+\usebeamercolor{palette primary}
+\clockbg{bg}
+\clockbdcolor{bg}
+\clockfontcolor{fg}
+\clockfontsize{6pt}
+
+
+\begin{frame}
+
+Here we have inserted the clock at the place reserved to the date, the foot line in the case of Madrid theme.
+
+\medskip
+
+To do that, we have redefined the date contents with the order
+\medskip
+
+\centerline{\structure{\texttt{$\backslash$date\{$\backslash$raisebox\{-1.8pt\}\{$\backslash$insertclock\}\}}} }
+
+\medskip
+
+Colors and size are adjusted according to the theme.
+
+\medskip
+
+Look at the foot!, the clock must be running.
+
+The clock has moved down properly to fit it to the foot of this theme.
+\end{frame}
+
+\date{
+\inserttogglebutton{}%
+\raisebox{-1.8pt}{\insertclock}%
+\insertresetbutton{}}
+
+\begin{frame}
+
+Now, in addition to the clock, we also insert a button to toggle between clock and stopwatch (left button), and a button to reset the stopwatch to zero (right button).
+
+\medskip
+
+To do that, we have redefined the date with the order
+
+\medskip
+
+\structure{\footnotesize
+\texttt{$\backslash$date\{\% \\
+$\backslash$inserttogglebutton\{\}\% \\
+$\backslash$raisebox\{-1.8pt\}\{$\backslash$insertclock\}\% \\
+$\backslash$insertresetbutton\{\}\}}
+}
+
+\medskip
+
+The clock must be running at the foot. Click at the left button, see what happens,
+and click at the right button and see the result.
+\end{frame}
+
+
+%
+% Here we change the colors and size of the clock
+%
+\definecolor{myred}{rgb}{0.8,0,0} % rojo
+\definecolor{mycolor}{rgb}{0.80,0.50,0.20} %  darkorangere
+
+\clockbg{mycolor}
+\clockbdcolor{myred}
+\clockfontcolor{black}
+\clockheight{0.20cm}
+\clockwidth{2.0cm}
+\clockfontsize{5pt}
+
+
+\begin{frame}[fragile]
+Here we have just changed the colors and the size of the clock using the next sentences
+
+\begin{verbatim}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mycolor}{rgb}{0.80,0.50,0.20}
+\clockbg{mycolor}
+\clockbdcolor{myred}
+\clockfontcolor{black}
+\clockheight{0.20cm}
+\clockwidth{2.0cm}
+\clockfontsize{5pt}
+\end{verbatim}
+
+
+\end{frame}
+
+\clockbg{mycolor}
+\clockbdcolor{myred}
+\clockfontcolor{black}
+\clockheight{0.25cm}
+\clockwidth{2.0cm}
+\clockfontsize{6pt}
+
+\begin{frame}
+
+Next, we insert a toggle button, with a text:
+
+\medskip
+
+\clocktogglecolor{red}
+\quad \inserttogglebutton{\bf Click here to toggle clock-stopwatch}
+
+
+\bigskip
+\begin{tabular}{|l|l|l|}
+\hline
+clock & \insertclock & \structure{$\backslash$insertclock} \\[3pt]
+\hline
+stopwatch & \insertcrono & \structure{$\backslash$insertcrono} \\[3pt]
+\hline
+current time & \inserttime & \structure{$\backslash$inserttime} \\[3pt]
+\hline
+current date & \insertcurrentdate & \structure{$\backslash$insertcurrentdate}\\
+\hline
+\end{tabular}
+\end{frame}
+
+
+\end{document}
+

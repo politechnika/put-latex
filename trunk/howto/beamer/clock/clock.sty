@@ -1,0 +1,191 @@
+\ProvidesPackage{clock} [2007/09/05 v1.1 clock accessory]
+
+%
+%  Luis Randez  randez@unizar.es
+%  Juan I. Montijano  monti@unizar.es
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+
+\RequirePackage{hyperref}
+\RequirePackage{xcolor}[2004/05/09]
+
+\ifdefined\clock@fontsize\else\newdimen\clock@fontsize\clock@fontsize=7pt\fi
+\ifdefined\clock@height\else\newdimen\clock@height\clock@height=0.23cm\fi
+\ifdefined\clock@width\else\newdimen\clock@width\clock@width=2.35cm\fi
+\ifdefined\clock@bg\else\newcommand{\clock@bg}{0.1 0.11 0.83}\fi
+\ifdefined\clock@bdcolor\else\newcommand{\clock@bdcolor}{0.1 0.11 0.83}\fi
+\ifdefined\clock@fontcolor\else\newcommand{\clock@fontcolor}{1 1 1}\fi
+\ifdefined\clock@font\else\newcommand{\clock@font}{"font.HelvB"}\fi
+
+\ifdefined\clock@togglecolor\else\newcommand{\clock@togglecolor}{1 1 1}\fi
+\ifdefined\clock@resetcolor\else\newcommand{\clock@resetcolor}{1 0 0}\fi
+
+\def\clock@temp#1{\def\clock@tempa##1,##2,##3\@nil{##1 ##2 ##3}%
+\extractcolorspec{#1}\clock@tempb
+    \expandafter\convertcolorspec\clock@tempb{rgb}\clock@tempb
+    \edef\clock@tempa{\expandafter\clock@tempa\clock@tempb\@nil}}
+
+\def\clockbg#1{\clock@temp{#1}\let\clock@bg=\clock@tempa}
+\def\clockbdcolor#1{\clock@temp{#1}\let\clock@bdcolor=\clock@tempa}
+\def\clockfontcolor#1{\clock@temp{#1}\let\clock@fontcolor=\clock@tempa}
+
+\def\clockfontsize#1{\clock@fontsize=#1}
+\def\clockheight#1{\clock@height=#1}
+\def\clockwidth#1{\clock@width=#1}
+\def\clockfont#1{\renewcommand{\clock@font}{#1}}
+
+
+\def\clocktogglecolor#1{\clock@temp{#1}\let\clock@togglecolor=\clock@tempa}
+\def\clockresetcolor#1{\clock@temp{#1}\let\clock@resetcolor=\clock@tempa}
+%
+%
+%
+\def\inserttogglebutton#1{\PushButton[name=button1, bordercolor=\clock@togglecolor, height=0.18cm, onclick={\auxiliar;}]{#1}}
+
+\def\insertresetbutton#1{\PushButton[name=button2, bordercolor=\clock@resetcolor, height=0.18cm, onclick={\resetclock;}]{{#1}}}
+
+\def\insertclock{%
+\begin{Form}
+{\mbox{\TextField[name=resultado1, width=\clock@width, height=\clock@height, align = 1, color =\clock@fontcolor, charsize = \clock@fontsize,
+bordercolor= \clock@bdcolor, backgroundcolor=\clock@bg,value={}]{}}}
+\end{Form}
+}
+%
+\def\insertcrono{%
+\begin{Form}
+\mbox{\TextField[name=crono, width=\clock@width, height=\clock@height, align = 1, color =\clock@fontcolor, charsize = \clock@fontsize,
+bordercolor= \clock@bdcolor, backgroundcolor=\clock@bg,value={}]{}}
+\end{Form}
+}
+%
+\def\inserttime{%
+\begin{Form}
+\mbox{\TextField[name=time, width=\clock@width, height=\clock@height, align = 1, color =\clock@fontcolor, charsize = \clock@fontsize,
+bordercolor= \clock@bdcolor, backgroundcolor=\clock@bg,value={}]{}}
+\end{Form}
+}
+%
+\def\insertcurrentdate{%
+\begin{Form}
+\mbox{\TextField[name=currentdate, width=\clock@width, height=\clock@height, align = 1, color =\clock@fontcolor, charsize = \clock@fontsize,
+bordercolor= \clock@bdcolor, backgroundcolor=\clock@bg,value={}]{}}
+\end{Form}
+}
+%
+
+\def\initclock{
+\vbox to 0pt{
+\begin{Form}
+$$
+\TextField[format=\startclock{\clock@font},name=resultado2, hidden=true, width=0truecm, height=0truecm, bordercolor= 1 1 1, backgroundcolor= 1 1 1,value={}]{}
+$$
+$$
+\TextField[name=crono,hidden=true, width=0truecm, height=0truecm, bordercolor= 1 1 1, backgroundcolor= 1 1 1,value={}]{}
+$$
+$$
+\TextField[name=time, hidden=true, width=0truecm, height=0truecm, bordercolor= 1 1 1, backgroundcolor= 1 1 1,value={}]{}
+$$
+$$
+\TextField[name=currentdate, hidden=true, width=0truecm, height=0truecm, bordercolor= 1 1 1, backgroundcolor= 1 1 1,value={}]{}
+$$
+\end{Form}%
+\TextField[name=resultado1, hidden=true, width=0pt, height=0pt,charsize=0pt]{}
+\TextField[name=crono, hidden=true, width=0pt, height=0pt,charsize=0pt]{}
+\TextField[name=time, hidden=true, width=0pt, height=0pt,charsize=0pt]{}
+}\vskip -\baselineskip%
+}
+%
+
+
+%
+\def\resetclock{%
+fecha1 = rresett();
+}%
+%
+%
+%
+\def\auxiliar{%
+var iop= -iop;
+}%
+%
+%
+%
+\def\startclock#1{%
+%
+global.iop;
+global.fuente;
+var iop=1;
+var fuente=eval(#1);
+% var fuente=eval("font.Helv");
+% var fuente=eval("font.HelvB");
+%
+fecha1 = rresett();
+fecha1 = reloj();
+%this.getField("resultado1").value = fecha1;
+%this.getField("crono").value = fecha3;
+%this.getField("time").value = fecha4;
+run = app.setInterval("reloj();",1000);
+%
+%
+%
+function rresett()
+{
+var fObj0 = new Date();
+global.horas0 = fObj0.getHours();
+global.minutos0 = fObj0.getMinutes();
+global.segundos0 = fObj0.getSeconds();
+}
+%
+%
+%
+function reloj()
+{
+%
+var fObj     = new Date();
+var dia      = formateo(fObj.getDate());
+var mes      = formateo(fObj.getMonth()+1);
+var year     = fObj.getFullYear();
+var horas    = fObj.getHours(); horas1 = horas;
+var minutos  = fObj.getMinutes() ; minutos1 = minutos;
+var segundos = fObj.getSeconds(); segundos1= segundos;
+%
+horas    = formateo(horas);
+minutos  = formateo(minutos);
+segundos = formateo(segundos);
+%
+resta = (eval(horas1-global.horas0)*60+eval(minutos1-global.minutos0))*60+eval(segundos1-global.segundos0);
+h = Math.floor(resta/3600);        htexto=formateo(h);
+m = Math.floor((resta-3600*h)/60); mtexto=formateo(m);
+s = resta-3600*h-60*m;             stexto=formateo(s);
+%
+if (iop == 1)
+{fecha1= dia+"/"+mes+"/"+year+ "  "+horas + ":"+minutos+":"+segundos;}
+else
+{fecha1=dia+"/"+mes+"/"+year+ "  "+htexto+":"+mtexto+":"+stexto; }
+this.getField("resultado1").value=fecha1;
+this.getField("resultado1").textFont=fuente;
+fecha3=htexto+":"+mtexto+":"+stexto;
+this.getField("crono").value=fecha3;
+this.getField("crono").textFont=fuente;
+fecha4=horas + ":"+minutos+":"+segundos;
+this.getField("time").value=fecha4;
+this.getField("time").textFont=fuente;
+fecha5=dia+"/"+mes+"/"+year;
+this.getField("currentdate").value=fecha5;
+this.getField("currentdate").textFont=fuente;
+}
+%
+%
+function formateo(uin)
+{
+if (uin <= 9) uin = "0" + uin;
+return uin;
+}
+
+}
+
+%
+\endinput
+
