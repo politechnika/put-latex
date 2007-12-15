@@ -1,0 +1,164 @@
+
+\documentclass[compress]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+\usepackage{dwlecture}
+\usepackage{soul}
+
+\title{Obliczenia rozproszone w~laboratoriach Instytutu~Informatyki~(na~piechotkę)}
+\author{Dawid Weiss}
+\date{2006--2007}
+
+\newcommand{\terminal}[1]{{\color{blue}{#1}}}
+
+\AtBeginSection[] {
+  \begin{frame}<beamer>
+    \framesubtitle{\insertpart}
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+  \end{frame}
+}
+
+\AtBeginSubsection[] {
+  \begin{frame}<beamer>
+    \framesubtitle{\insertpart}
+    \tableofcontents[sectionstyle=shaded,subsectionstyle=show/shaded/hide]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+\section{Założenia}
+
+\begin{frame}
+    \frametitle{Założenia}
+
+    \begin{itemize}
+        \item Programy pod system SuSE Linux (lub \emph{cross-platform}).
+        \item Konto do serwera \texttt{sirius}/ \texttt{polluks} (a tym samym do
+        maszyn w laboratoriach).
+        \item Znajomość poleceń powłoki systemu operacyjnego Linux.
+    \end{itemize}
+
+    \medskip    
+    \begin{itemize}
+        \item Użycie jednego z komputerów jako głównego (\emph{master}).
+        \item Użycie serwerów (końcówek) obliczeniowych (\emph{slaves}).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Środowisko}
+
+    Linux computers at the Institute use SuSE Linux and provide the following facilities:
+    \begin{itemize}
+        \item shared login system (LDAP client); you have the same user name and password on all
+        computers,
+        \item shared home folder (mounted network file system); this way you ``see'' the same home folder
+        no matter on which machine you log on.
+    \end{itemize}
+
+    The above features make it possible to have a uniform, password-less SSH access to all machines. Follow 
+    the steps from \texttt{cs-infrastructure} script to setup such an access.
+\end{frame}
+
+
+\section[SSH]{SSH, klucze publiczne, wykonywanie poleceń}
+
+\begin{frame}
+    \frametitle{Zdalne wykonywanie poleceń w systemie Linux}
+
+    \begin{block}{}
+    Wykonanie polecenia zdalnego polega na uruchomieniu programu
+    \texttt{ssh} z autoryzacją przy pomocy \emph{klucza prywatnego}.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Generowanie i instalacja klucza (bez hasła)}
+
+    \begin{itemize}
+        \item Generacja: \terminal{ssh-keygen -b 1024 -t rsa -f mykey} 
+              \\ $\to$ \texttt{mykey}, \texttt{mykey.pub}
+        \item Instalacja klucza publicznego (slave): 
+              \\ \terminal{cat mykey.pub \textgreater\hspace{-2pt}\textgreater .ssh/authorized\_keys2}
+
+              \medskip
+              Zwróć uwagę: współdzielony katalog \texttt{home} sprawia, że \emph{wszystkie}
+              komputery w laboratoriach mają od razu zainstalowany ten certyfikat.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Logowanie przy użyciu klucza prywatnego}
+
+    \begin{itemize}
+        \item Zalogowanie się na któryś z komputerów (Linux).
+        \item Odpalenie powłoki ,,agenta'': \terminal{ssh-agent bash}
+        \item Dodanie klucza prywatnego: \terminal{ssh-add mykey}
+        \item Sprawdzenie (może poprosić o weryfikację sygnatury hosta): \\
+        \terminal{ssh -2 -l \textit{username} polluks.cs.put.poznan.pl "ls -l; pwd"}
+        \item W praktyce: \\
+        \terminal{ssh -2 -l \textit{username} \textit{slave-host} "\textit{command}"}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ułatwienia}
+
+    Cezary Sobaniec oraz Ania i Jacek Kobusińscy udostępnili skrypty, które uruchamiają 
+    (sekwencyjnie lub równolegle) \emph{identyczne} polecenie na wielu hostach, 
+    zawartych w pliku konfiguracyjnym. 
+    
+    \medskip
+    Plik konfiguracyjny zawiera jeden host w każdej linii.
+
+    \medskip
+    Tym samym sekwencyjne sprawdzenie np.~ilości miejsca na wszystkich końcówkach ogranicza się 
+    do wykonania polecenia: \\ \terminal{./rshseq.sh computing.hosts df -h /tmp}.
+\end{frame}
+
+
+\section{Obliczenia i agregacja wyników}
+
+\begin{frame}
+    \frametitle{Przeprowadzenie obliczeń}
+
+    \begin{enumerate}
+        \item Przygotuj program (skrypt) tak, by można było przekazać ,,paczki'' danych (np.~jako
+        parametry z linii poleceń).
+
+        \item Zgromadź listę adresów komputerów, które będą wykorzystane (,,slaves''). Komputery
+        w laboratoriach mają adresy \texttt{lab-142-X} oraz \texttt{lab-143-X}; nie wszystkie są sprawne.
+
+        \item Utwórz skrypt powłoki na komputerze ,,master'', obliczający fragment zadania
+        na każdym z hostów.
+
+        \item Skopiuj wynik działania do katalogu domowego (NFS).
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Elementy wymagające uwagi}
+
+    \begin{itemize}
+        \item Programy lub dane zajmujące dużo miejsca. \\
+            $\to$ skopiować na końcówki (kat.~\texttt{/tmp/user}).
+        \item Programy lub dane używające dysku. \\
+            $\to$ nie używać katalogu domowego.
+        \item Komputery popsute/ niesprawne. \\
+            $\to$ sprawdzić wyniki/ przejrzeć logi.
+        \item Warto uzgodnić wykorzystanie komputerów z administratorami/
+        Czarkiem Sobańcem.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+    Podziękowania dla Cezarego Sobańca, Ani i~Jacka Kobusińskich za wskazówki i~pomoc.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,107 @@
+
+%
+% dwlecture.sty
+%
+% version 1.0 (initial)
+% version 1.1 (added hgraphics)
+% version 1.2 (added captions)
+
+%
+% Load typical packages
+%
+\usepackage{graphicx}
+\usepackage{url}
+
+%
+% Load and configure fancyvrb
+%
+\usepackage{fancyvrb}
+\RecustomVerbatimEnvironment{Verbatim}{Verbatim}
+  {fontsize=\scriptsize,frame=lines}
+
+%
+% Load textpos package, define graphics inclusion macros.
+%
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+\textblockorigin{0cm}{0cm}
+
+\usepackage{pgf}
+
+\newcommand{\vgraphics}[1]{%
+\begin{textblock}{1}(0,8.6)\begin{pgfpicture}{0cm}{0cm}{1cm}{1cm}
+\pgfputat{\pgfxy(6.4,4.8)}{\pgfbox[center,center]{\includegraphics[height=9.6cm]{#1}}}
+\end{pgfpicture}\end{textblock}}
+
+\newcommand{\hgraphics}[1]{%
+\begin{textblock}{1}(0,8.6)\begin{pgfpicture}{0cm}{0cm}{1cm}{1cm}
+\pgfputat{\pgfxy(6.4,4.8)}{\pgfbox[center,center]{\includegraphics[width=12.6cm]{#1}}}
+\end{pgfpicture}\end{textblock}}
+
+%
+% Configure beamer class
+%
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+
+\mode<presentation>
+{
+    \useoutertheme[]{split}
+    \useinnertheme{rectangles}
+    \usecolortheme{default}
+    
+    \setbeamercolor{section in head/foot}{use=structure,fg=white,bg=black!70!white}
+    \setbeamercolor{subsection in head/foot}{use=structure,fg=white,bg=black!60!white}
+
+    \setbeamercolor{block title}{use=structure,fg=structure.fg,bg=structure.fg!20!bg}
+    \setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg,bg=alerted text.fg!20!bg}
+    \setbeamercolor{block title example}{use=example text,fg=example text.fg,bg=example text.fg!20!bg}
+    
+    \setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!50!bg}
+    \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!50!bg}
+    \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!50!bg}
+
+    \setbeamercolor{frametitle}{bg=black!10!white}
+
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamertemplate{footline}{}
+
+    \setbeamertemplate{itemize items}[circle]
+    \setbeamertemplate{enumerate items}[circle]
+
+    \beamertemplateballitem
+    \beamertemplatenumberedballsectiontoc    
+}
+
+%
+% Define typical environments.
+%
+
+\newcommand{\code}[1]{\texttt{#1}}
+\renewcommand{\emph}[1]{\textbf{#1}}
+
+%
+% Define some weird environments
+%
+\newsavebox{\capbox}
+\newlength{\capwidth}
+
+\newcommand{\capcaption}[5]{%
+\begin{lrbox}{\capbox}\footnotesize#1\end{lrbox}%
+\settowidth{\capwidth}{\usebox{\capbox}}%
+\begin{textblock}{1}(0,8.6)
+\begin{pgfpicture}{0cm}{0cm}{1cm}{1cm}
+    \pgfputat{\pgfxy(#4,#5)}{\pgfbox[#2,#3]{
+        \begin{beamerboxesrounded}[shadow=false,lower=block title,width=\capwidth]{}
+        \usebox{\capbox}
+        \end{beamerboxesrounded}
+    }}
+\end{pgfpicture}
+\end{textblock}}
+
+\newcommand{\lbcaption}[1]{\capcaption{#1}{left}{bottom}{.2}{.2}}
+\newcommand{\rbcaption}[1]{\capcaption{#1}{right}{bottom}{12.6}{.2}}
+\newcommand{\ltcaption}[1]{\capcaption{#1}{left}{top}{.2}{9.4}}
+\newcommand{\rtcaption}[1]{\capcaption{#1}{right}{top}{12.6}{9.4}}
+
