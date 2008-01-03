@@ -14,13 +14,15 @@ if [ "$1" = "-q" -o "$1" = "--quiet" ]; then
   shift
 fi
 
+SSH_OPTS="-o ConnectTimeout=1"
+
 sed -e 's/#.*//' -e '/^[ \t]*$/d' $HOSTS >.hosts.tmp
 for H in `cat .hosts.tmp`
 do
 if [ ! $quiet ]; then
-  ssh $H "$*" && echo "OK on host $H"
+  ssh $SSH_OPTS $H "$*" && echo "OK on host $H"
 else
-  ssh $H "$*" && echo "OK on host $H" || echo "Failure on host $H!"
+  ssh $SSH_OPTS $H "$*" && echo "OK on host $H" || echo "Failure on host $H!"
 fi
 done
 #wait
