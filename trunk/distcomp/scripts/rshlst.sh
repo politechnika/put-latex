@@ -16,7 +16,7 @@ else
 fi
 
 # Don't wait too long for inaccessible hosts.
-SSH_OPTS="-o ConnectTimeout=2 -o BatchMode=yes"
+SSH_OPTS="-o ConnectTimeout=2 -o BatchMode=yes -o StrictHostKeyChecking=no"
 
 TMP=`mktemp -t -d`
 sed -e 's/#.*//' -e '/^[ \t]*$/d' $HOSTS > $TMP/hosts
