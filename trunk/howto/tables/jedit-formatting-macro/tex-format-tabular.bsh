@@ -1,0 +1,281 @@
+%
+% JEdit macro for plain-text formatting tabular and tabularx environments
+% (without complex cases).
+% 
+% Usage: select everything (including) \begin{tabular}....\end{tabular} and
+% run the macro. It should format the content according to your specification
+% (adding padding spaces and justifying where needed). Example:
+% 
+%
+%
+% \begin{tabular}{l c c r}
+% \toprule
+% l & c & c & r\\
+% \multicolumn{2}{c}{span-c-2} & \multicolumn{2}{c}{span-c-2} \\
+% l & \multicolumn{2}{l}{span-l-2} & r\\
+% l & \multicolumn{3}{r}{span-r-3} \\
+% \midrule
+% 2&	172&	16& 0,172 	\\
+% 2&	172&	16& 0,172 	\\
+% 2&	172&	16& 0,172 	\\
+% \bottomrule
+% \end{tabular}
+% 
+% becomes:
+% 
+% \begin{tabular}{l c c r}
+% \toprule
+% l             &       c       &       c       &            r \\ 
+% \multicolumn{2}{c}{span-c-2}  & \multicolumn{2}{c}{span-c-2} \\ 
+% l             & \multicolumn{2}{l}{span-l-2}  &            r \\ 
+% l             &                 \multicolumn{3}{r}{span-r-3} \\ 
+% \midrule
+% 2             &      172      &      16       &        0,172 \\ 
+% 2             &      172      &      16       &        0,172 \\ 
+% 2             &      172      &      16       &        0,172 \\ 
+% \bottomrule
+% \end{tabular}
+%
+
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class FormatLatexTable {
+	private static Logger logger = Logger.getAnonymousLogger();
+
+	public static String process(String content) {
+		final String EOL = "\n";
+		content = content.trim();
+
+		// Check if this really is a table.
+		if (content.length() == 0) {
+			return content;
+		}
+
+		// Parse the environment's block.
+		String columnFormat;
+		String header;
+		String footer;
+		String body;
+
+		if (content.startsWith("\\begin{tabular}")) {
+			final Matcher m = Pattern.compile(
+					"((\\\\begin\\{tabular\\}\\{)" +
+					"([^\\}]+)" +
+					"(}))" +
+					"(.*)" +
+					"(\\\\end\\{tabular.+)",
+					Pattern.MULTILINE | Pattern.DOTALL).matcher(content);
+			if (!m.find()) throw new RuntimeException("Columns spec not found.");
+
+			header = m.group(1);
+			columnFormat = m.group(3).replaceAll("[^lrpcX]", "");
+			body = m.group(5).trim();
+			footer = m.group(6);
+		} else if (content.startsWith("\\begin{tabularx}")) {
+			final Matcher m = Pattern.compile(
+					"((\\\\begin\\{tabularx\\}\\{[^\\}]*\\})" +
+					"([^\\}]+)" +
+					"(}))" +
+					"(.*)" +
+					"(\\\\end\\{tabular.+)",
+					Pattern.MULTILINE | Pattern.DOTALL).matcher(content);
+			if (!m.find()) throw new RuntimeException("Columns spec not found.");
+
+			header = m.group(1);
+			columnFormat = m.group(3).replaceAll("[^lrpcX]", "");
+			body = m.group(5).trim();
+			footer = m.group(6);
+		} else {
+			// Not a tabular environment?
+			return content;
+		}
+
+		// Define inner classes.
+		class Column {
+			char alignment = 'l';
+			int width;
+			String separator = " & ";
+		}
+
+		class Cell {
+			boolean specialLine;
+
+			char alignment;
+			String value;
+			int colspan = 1;
+
+			public Cell(String value) {
+				this.value = value;
+			}
+
+			public Cell(String value, boolean endCurrentRow) {
+				this(value);
+				this.specialLine = endCurrentRow;
+			}
+		}
+
+		// Parse column specification.
+		final Column [] columnSpec = new Column [columnFormat.length() + 1];
+		for (int i = 0; i < columnFormat.length(); i++) {
+			columnSpec[i] = new Column();
+			columnSpec[i].alignment = columnFormat.charAt(i);
+		}
+		columnSpec[columnFormat.length()] = new Column();
+		columnSpec[columnFormat.length()].separator = EOL;
+		columnSpec[columnFormat.length()-1].separator = " \\\\ ";
+
+		// Split into lines and columns
+		ArrayList lines = new ArrayList(Arrays.asList(body.split("[\\r\\n]")));
+
+		Pattern commandLine = Pattern.compile("(\\\\[a-z]+\\s*)+", Pattern.MULTILINE | Pattern.DOTALL);
+		for (int i = 0; i < lines.size(); i++) {
+			if (commandLine.matcher(((String) lines.get(i)).trim()).matches()) {
+				continue;
+			}
+
+			while ((i + 1 < lines.size()) && ((String) lines.get(i)).indexOf("\\\\") < 0) {
+				String prev = (String) lines.get(i);
+				String next = (String) lines.remove(i + 1);
+
+				lines.set(i, prev.trim() + " " + next.trim()); 
+			}
+		}
+
+		Cell [][] data = new Cell [lines.size()][];
+
+		for (int i = 0; i < lines.size(); i++) {
+			final String line = ((String) lines.get(i)).trim();
+			if (commandLine.matcher(line).matches()) {
+				// Not a table line, emit it directly.
+				data[i] = new Cell [] { new Cell(line.trim(), true) };
+				continue;
+			}
+
+		    String [] cols = line.split("([\\&])|(\\\\\\\\)");
+
+		    for (int j = 0; j < cols.length; j++) cols[j] = cols[j].trim();
+
+		    if (cols.length > columnSpec.length) {
+		    	throw new RuntimeException("Row has more columns than expected (" + 
+		    			columnSpec.length + "): " +
+		    			Arrays.asList(cols));
+		    }
+
+		    data[i] = new Cell[cols.length];
+		    for (int j = 0; j < cols.length; j++) {
+			    data[i][j] = new Cell(cols[j]);
+
+			    Pattern multicol = Pattern.compile("(?:\\\\multicolumn\\{)([0-9]+)(?:\\}\\{)([^\\}]+)(.+)");
+			    Matcher m = multicol.matcher(cols[j]);
+			    if (m.matches()) {
+			    	data[i][j].colspan = Integer.parseInt(m.group(1));
+			    	data[i][j].alignment = ((String) m.group(2)).charAt(0);
+			    }
+		    }
+		}
+
+		// Calculate width for each column.
+	    for (int i = 0; i < data.length; i++) {
+	    	int dtacol = 0;
+	    	for (int col = 0; col < columnSpec.length; col++, dtacol++) {
+		        if (dtacol >= data[i].length) continue;
+
+		        Cell cell = data[i][dtacol];
+		        int cellen = cell.value.length();
+		        if (cell.colspan == 1) {
+		        	columnSpec[col].width = Math.max(columnSpec[col].width, cellen);
+		        } else {
+		        	for (int j = 0; j < cell.colspan - 1; j++) {
+		        		cellen -= columnSpec[col + j].separator.length();
+		        	}
+
+		        	for (int j = 0; j < cell.colspan; j++) {
+			        	columnSpec[col + j].width = Math.max(
+			        			columnSpec[col + j].width,
+			        			(cellen / cell.colspan)
+			        				+ ((cellen % cell.colspan) > j ?  1 : 0));
+		        	}
+		        }
+
+		        col += cell.colspan - 1;
+		    }
+		}
+
+		// Join
+		final StringBuffer out = new StringBuffer();
+row:	
+		for (int row = 0; row < data.length; row++) {
+			int dtacol = 0;
+		    for (int col = 0; col < columnSpec.length; col++, dtacol++) {
+		        Cell cell = (dtacol < data[row].length ? data[row][dtacol] : new Cell(""));
+
+		        if (cell.specialLine) {
+		        	out.append(cell.value);
+		        	out.append(EOL);
+                    
+                    // WORKAROUND (BeanShell has a problem with named continue);
+		        	// continue row;
+                    col = columnSpec.length;
+                    continue;
+		        }
+
+		        final String value = cell.value;
+		        
+		        int width = 0;
+		        for (int i = 0; i < cell.colspan; i++) { 
+		        	width += columnSpec[col + i].width;
+		        	if (i + 1 < cell.colspan) {
+		        		width += columnSpec[col + i].separator.length();
+		        	}
+		        }
+
+		        int lpad = 0;
+		        int rpad = 0;
+
+		        char alignment = (cell.alignment != 0 ?
+		        		cell.alignment : columnSpec[col].alignment);
+
+		        switch (alignment) {
+		        	case 'r':
+			        	lpad = width - value.length();
+			        	break;
+		        	case 'c':
+		        		lpad = (width - value.length()) / 2;
+		        		rpad = (width - value.length()) - lpad;
+		        		break;
+		        	case 'p':
+		        	case 'l':
+		        	default:
+			        	rpad = width - value.length();
+			        	break;
+		        }
+		        
+		        while (lpad-- > 0) out.append(' ');
+		        out.append(cell.value);
+		        while (rpad-- > 0) out.append(' ');
+
+		        col += cell.colspan - 1;
+
+		        out.append(columnSpec[col].separator);
+		    }
+		}		
+
+		return header + EOL + out.toString() + footer;
+	}
+}
+
+content = textArea.getSelectedText();
+if (content == null || "".equals(content.trim())) {
+    return;
+}
+textArea.setSelectedText(FormatLatexTable.process(content));
+
