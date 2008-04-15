@@ -1,41 +1,41 @@
-%
-% JEdit macro for plain-text formatting tabular and tabularx environments
-% (without complex cases).
-% 
-% Usage: select everything (including) \begin{tabular}....\end{tabular} and
-% run the macro. It should format the content according to your specification
-% (adding padding spaces and justifying where needed). Example:
-% 
-%
-%
-% \begin{tabular}{l c c r}
-% \toprule
-% l & c & c & r\\
-% \multicolumn{2}{c}{span-c-2} & \multicolumn{2}{c}{span-c-2} \\
-% l & \multicolumn{2}{l}{span-l-2} & r\\
-% l & \multicolumn{3}{r}{span-r-3} \\
-% \midrule
-% 2&	172&	16& 0,172 	\\
-% 2&	172&	16& 0,172 	\\
-% 2&	172&	16& 0,172 	\\
-% \bottomrule
-% \end{tabular}
-% 
-% becomes:
-% 
-% \begin{tabular}{l c c r}
-% \toprule
-% l             &       c       &       c       &            r \\ 
-% \multicolumn{2}{c}{span-c-2}  & \multicolumn{2}{c}{span-c-2} \\ 
-% l             & \multicolumn{2}{l}{span-l-2}  &            r \\ 
-% l             &                 \multicolumn{3}{r}{span-r-3} \\ 
-% \midrule
-% 2             &      172      &      16       &        0,172 \\ 
-% 2             &      172      &      16       &        0,172 \\ 
-% 2             &      172      &      16       &        0,172 \\ 
-% \bottomrule
-% \end{tabular}
-%
+//
+// JEdit macro for plain-text formatting tabular and tabularx environments
+// (without complex cases).
+// 
+// Usage: select everything (including) \begin{tabular}....\end{tabular} and
+// run the macro. It should format the content according to your specification
+// (adding padding spaces and justifying where needed). Example:
+// 
+//
+//
+// \begin{tabular}{l c c r}
+// \toprule
+// l & c & c & r\\
+// \multicolumn{2}{c}{span-c-2} & \multicolumn{2}{c}{span-c-2} \\
+// l & \multicolumn{2}{l}{span-l-2} & r\\
+// l & \multicolumn{3}{r}{span-r-3} \\
+// \midrule
+// 2&	172&	16& 0,172 	\\
+// 2&	172&	16& 0,172 	\\
+// 2&	172&	16& 0,172 	\\
+// \bottomrule
+// \end{tabular}
+// 
+// becomes:
+// 
+// \begin{tabular}{l c c r}
+// \toprule
+// l             &       c       &       c       &            r \\ 
+// \multicolumn{2}{c}{span-c-2}  & \multicolumn{2}{c}{span-c-2} \\ 
+// l             & \multicolumn{2}{l}{span-l-2}  &            r \\ 
+// l             &                 \multicolumn{3}{r}{span-r-3} \\ 
+// \midrule
+// 2             &      172      &      16       &        0,172 \\ 
+// 2             &      172      &      16       &        0,172 \\ 
+// 2             &      172      &      16       &        0,172 \\ 
+// \bottomrule
+// \end{tabular}
+//
 
 
 import java.io.IOException;
