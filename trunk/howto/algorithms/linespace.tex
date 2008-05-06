@@ -1,0 +1,38 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+\usepackage[noend,boxed]{algorithm2e}
+
+\begin{document}
+
+Some initial text before the algorithm is described. This is put here 
+in order to see what is the line spacing.
+
+%\renewcommand{\baselinestretch}{2}
+%\linesnotnumbered
+%\linesnumbered
+
+\makeatletter
+\renewcommand{\algocf@linesnumbered}{\everypar={\rule{0pt}{.9\baselineskip}}}
+\makeatother
+
+\begin{algorithm}[h]
+\dontprintsemicolon
+Initialize\;
+\While{still this year}{
+   \Repeat{Tomorrow AFTERNOON}{
+     \If{condition satisfied}{
+       Do something\;
+     }
+     Do the next step\;
+   }
+   Finalize\;
+}
+\KwRet{The best from today}
+\end{algorithm}
+
+Some text after the algorithm is described. This is put here in order 
+to see what is the line spacing.
+
+\end{document}
