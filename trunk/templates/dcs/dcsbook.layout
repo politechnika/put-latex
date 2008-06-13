@@ -1,0 +1,152 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass{dcsbook}
+#
+#  Author: Cezary Sobaniec
+#  $Id: dcsbook.layout,v 1.5 2006/09/01 18:34:07 sobaniec Exp $
+#
+
+
+Format 2
+Input stdclass.inc
+Input numreport.inc
+
+Sides            2
+ProvidesURL      1
+
+NoStyle          Abstract
+
+
+# Dispitems style definition
+Style DispItems
+  Margin         Manual
+  LatexType      List_Environment
+  LatexName      dispitems
+  NextNoindent   1
+  LabelSep       xxx
+  ParSkip        0.4
+  TopSep         0.7
+  BottomSep      0.7
+  ParSep         0.3
+  Align          Block
+  AlignPossible  Block, Left
+  LabelType      Manual
+  LabelString    "default"
+End
+
+
+# Enumeratex style definition
+Style Enumeratex
+  Margin         Manual
+  LatexType      List_Environment
+  LatexName      enumeratex
+  NextNoIndent   1
+  LeftMargin     MMN
+  LabelSep       xx
+  ParSkip        0.0
+  ItemSep        0.2
+  TopSep         0.7
+  BottomSep      0.7
+  ParSep         0.3
+  Align          Block
+  AlignPossible  Block, Left
+  LabelType      Enumerate
+  LabelString    "{} 1."
+End
+
+
+# LyX-Code-Small style definition
+Style LyX-Code-Small
+  Margin         Static
+  LatexType      Environment
+  LatexName      lyxcodesmall
+  NextNoIndent   1
+  LeftMargin     MMM
+  RightMargin    ""
+  TopSep         0.5
+  BottomSep      0.5
+  Align          Left
+  AlignPossible  Block, Left, Right, Center
+  LabelType      No_Label
+  FreeSpacing    1
+
+  # standard font definition
+  Font
+    Family       Typewriter
+    Size         Small
+  EndFont
+End
+
+
+# Supervisor style definition
+Style Supervisor
+  Margin                Static
+  LatexType             Command
+  InTitle               1
+  LatexName             supervisor
+  LabelSep              xxx
+  ParSkip               0.4
+  TopSep                1.3
+  BottomSep             0.7
+  ParSep                0.7
+  Align                 Center
+  AlignPossible         Center
+  LabelType             Static
+  LabelSep              :x
+  LabelString           "Supervisor:"
+
+  # standard font definition
+  Font
+    Size                Large
+  EndFont
+
+End
+
+
+# Reviewer style definition
+Style Reviewer
+  Margin                Static
+  LatexType             Command
+  InTitle               1
+  LatexName             reviewer
+  LabelSep              xxx
+  ParSkip               0.4
+  TopSep                1.3
+  BottomSep             0.7
+  ParSep                0.7
+  Align                 Center
+  AlignPossible         Center
+  LabelType             Static
+  LabelSep              :x
+  LabelString           "Reviewer:"
+
+  # standard font definition
+  Font
+    Size                Large
+  EndFont
+
+End
+
+
+# Abstract style definition
+Style Abstract
+  Margin                First_Dynamic
+  LatexType             Environment
+  LatexName             abstract
+  NextNoIndent          0
+  ParIndent             MM
+  LabelSep              xx
+  ItemSep               0
+  TopSep                0.7
+  BottomSep             0.7
+  ParSep                0
+  Align                 Block
+  AlignPossible         Block, Left
+  LabelType             Centered_Top_Environment
+  LabelString           Abstract
+
+  # label font definition
+  LabelFont
+    Series              Bold
+  EndFont
+End
+

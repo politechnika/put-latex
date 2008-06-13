@@ -1,0 +1,301 @@
+%
+%  Cezary Sobaniec <sobaniec@cs.put.poznan.pl>
+%
+%  $Id: dcslib.sty,v 1.32 2008/04/09 14:26:14 sobaniec Exp $
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dcslib}[2006/09/01 v0.8 DCS Group library package]
+
+\RequirePackage{listings}[2004/09/07]
+\RequirePackage{longtable}
+\RequirePackage{float}
+\RequirePackage{lmodern}
+\RequirePackage{ifthen}
+\RequirePackage{array}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{url}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{enumerate}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{prettyref}
+% will be replaced by subfig in future
+\RequirePackage[tight,sf,SF,small]{subfigure}
+\RequirePackage{caption}[2004/07/16]
+\RequirePackage{babel}
+
+
+% colors
+\definecolor{white}{rgb}{1, 1, 1}
+\definecolor{green}{rgb}{0,0.45,0}
+\definecolor{red}{rgb}{0.8, 0.0, 0.0}
+\definecolor{blue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{gray}{rgb}{0.6,0.6,0.6}
+\definecolor{dkgreen}{rgb}{0,0.35,0}
+\definecolor{dkblue}{rgb}{0, 0.0, 0.5}
+\definecolor{dkred}{rgb}{0.6, 0.0, 0.0}
+\definecolor{directive}{rgb}{0.35, 0.0, 0.35}
+\definecolor{ltgray}{rgb}{0.8,0.8,0.8}
+\definecolor{midgray}{rgb}{0.4,0.4,0.4}
+\definecolor{dkgray}{rgb}{0.2,0.2,0.2}
+\definecolor{linkcolor}{rgb}{0.1, 0.1, 0.6}
+\definecolor{bgcolor}{rgb}{0.90,0.90,0.90}
+\definecolor{framebg}{rgb}{0.95,0.95,0.95}
+
+\newcommand{\colorfillbox}[3]%
+  {\colorbox{#1}{\parbox[b]{#2}{\rule{0pt}{#3}\mbox{}}}}
+
+
+% fonts
+\newcommand{\condensed}[1]{\ttfamily\fontsize{#1}{#1}\selectfont}
+\newcommand{\condensedx}[2]{\ttfamily\fontsize{#1}{#2}\selectfont}
+
+
+% url
+\def\UrlFont{\ttfamily}
+
+
+% listings setup
+\newlength{\lstxframesep}
+\setlength{\lstxframesep}{0.5em}
+\newlength{\lstyframesep}
+\setlength{\lstyframesep}{0.5ex}
+\lstset{tabsize=2,extendedchars=true,
+        escapeinside={/*@}{@*/},
+        basicstyle=\small\ttfamily,basewidth=0.5em,
+        showspaces=false,showstringspaces=false,
+        includerangemarker=false,rangeprefix=//,
+        language=,numberstyle=\tiny\sffamily,
+        aboveskip=\bigskipamount,belowskip=\bigskipamount,
+        abovecaptionskip=\medskipamount,belowcaptionskip=\bigskipamount}
+\lstdefinestyle{bgcolor}{backgroundcolor=\color{framebg},
+                         frame=single,
+                         framexleftmargin=\lstxframesep,
+                         framexrightmargin=\lstxframesep,
+                         framextopmargin=3\lstyframesep,
+                         framexbottommargin=3\lstyframesep,
+                         xleftmargin=\lstxframesep,xrightmargin=\lstxframesep,
+                         rulecolor=\color{framebg}}
+\lstdefinestyle{rpcgen}{language=c,morekeywords={program,version}}
+\lstdefinestyle{ldif}{language=}
+
+\newcommand{\codeinc}[4][]{\lstinputlisting[frame=lines,
+        framexleftmargin=\lstxframesep,framexrightmargin=\lstxframesep,
+        framextopmargin=\lstyframesep,framexbottommargin=\lstyframesep,
+        xleftmargin=\lstxframesep,xrightmargin=\lstxframesep,
+        aboveskip=0em,belowskip=0cm,float,
+        caption=#3,label=#4,#1]{#2}}
+\newcommand{\codeincn}[4][]{\lstinputlisting[frame=lines,
+        framexleftmargin=4.5\lstxframesep,framexrightmargin=\lstxframesep,
+        framextopmargin=\lstyframesep,framexbottommargin=\lstyframesep,
+        numbers=left,xleftmargin=4.5\lstxframesep,xrightmargin=\lstxframesep,
+        aboveskip=0em,belowskip=0cm,float,
+        caption=#3,label=#4,#1]{#2}}
+
+\newlength{\codemargin}
+\newcommand{\resetcodemargin}{%
+  \advance\@listdepth by 1%
+  \setlength{\codemargin}{\csname leftmargin\romannumeral\the\@listdepth\endcsname}
+  \advance\@listdepth by -1%
+}
+
+\newcommand{\codeincp}[2][]{
+  \resetcodemargin\lstinputlisting[xleftmargin=\codemargin,#1]{#2}}
+
+\lstnewenvironment{codeblock}[1][]{%
+  \resetcodemargin\lstset{xleftmargin=\codemargin,#1}}{}
+
+
+% manpages
+\newcommand{\funidx}[1]{\index{funkcja!\texttt{#1}}}
+\newcommand{\cmdidx}[1]{\index{polecenie!\texttt{#1}}}
+\newcommand{\srvidx}[1]{\index{us\l{}uga!\texttt{#1}}}
+\newcommand{\man}[3][]{\begingroup\urlstyle{tt}\Url{#2(#3)}%
+\ifthenelse{#3=1}{\cmdidx{#2}}{%
+\ifthenelse{#3=8}{\cmdidx{#2}}{%
+\ifthenelse{#3=3}{\funidx{#2}}{%
+\ifthenelse{#3=2}{\funidx{#2}}{%
+\ifthenelse{\equal{#1}{}}{\index{plik konfiguracyjny!\texttt{#2}}}{%
+  \index{plik konfiguracyjny!\texttt{#1}}}}}}}}
+\newcommand{\manwi}[3][]{\begingroup\urlstyle{tt}\Url{#2(#3)}}
+
+\newcommand{\fun}[2][]{\ifthenelse{\equal{#1}{}}{\texttt{#2}}{\texttt{#2(#1)}}}
+
+
+% Java documentation
+\newcommand{\japiurlbase}{http://java.sun.com/j2se/1.5.0/docs/api}
+\newcommand{\japipkg}[2][]{\href{\japiurlbase/#2/package-summary.html}%
+  {\ifthenelse{\equal{#1}{}}{#2}{#1}}}
+\newcommand{\japiclass}[2][]{\href{\japiurlbase/#2.html}%
+  {\ifthenelse{\equal{#1}{}}{#2}{#1}}}
+
+
+% arrays/tabular
+\setlength{\extrarowheight}{0.3ex}
+
+
+% math
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
+\setlength\arraycolsep{1.4\p@}
+
+
+% polish translations
+\newcommand{\techreportname}{Technical Report}
+\DeclareOption{polish}{
+  \renewcommand{\techreportname}{Raport badawczy}
+  \renewcommand{\lstlistingname}{Przyk\l{}ad}
+  \AtBeginDocument{\renewcommand{\figurename}{Rys.}}
+  \AtBeginDocument{\renewcommand{\tablename}{Tab.}}
+  \AtBeginDocument{\renewcommand{\indexname}{Skorowidz}}
+  % pretty references
+  \newrefformat{lem}{Lemat~\ref{#1}}
+  \newrefformat{thm}{Twierdzenie~\ref{#1}}
+  \newrefformat{cha}{Rozdzia\l{}~\ref{#1}}
+  \newrefformat{sec}{Punkt~\ref{#1}}
+  \newrefformat{sub}{Podpunkt~\ref{#1}}
+  \newrefformat{tab}{Tab.~\ref{#1}}
+  \newrefformat{fig}{Rys.~\ref{#1}}
+}
+\DeclareOption{english}{
+  \renewcommand{\techreportname}{Technical Report}
+  \renewcommand{\lstlistingname}{Example}
+  \AtBeginDocument{\renewcommand{\figurename}{Fig.}}
+  \AtBeginDocument{\renewcommand{\tablename}{Tab.}}
+  \AtBeginDocument{\renewcommand{\indexname}{Index}}
+  % pretty references
+  \newrefformat{lem}{Lemma~\ref{#1}}
+  \newrefformat{thm}{Theorem~\ref{#1}}
+  \newrefformat{cha}{Chapter~\ref{#1}}
+  \newrefformat{sec}{Section~\ref{#1}}
+  \newrefformat{sub}{Subsection~\ref{#1}}
+  \newrefformat{tab}{Tab.~\ref{#1}}
+  \newrefformat{fig}{Fig.~\ref{#1}}
+}
+
+
+% captions
+\captionsetup{font={sf,small},labelfont=bf,
+              margin=2\parindent,
+              aboveskip=\smallskipamount,
+              belowskip=\medskipamount}
+\captionsetup[table]{position=top}
+\captionsetup[lstlisting]{singlelinecheck=false,margin=0em,
+                          position=top,aboveskip=\bigskipamount}
+
+
+% theorems
+\newtheoremstyle{dcs}
+  {\bigskipamount}{\bigskipamount}
+  {\itshape}{0pt}{\scshape}{.}{1ex}{}
+\newtheoremstyle{dcsplain}
+  {\bigskipamount}{\bigskipamount}
+  {}{0pt}{\itshape}{.}{1ex}{}
+\newtheoremstyle{dcsnote}
+  {\medskipamount}{\medskipamount}
+  {\color{blue}\footnotesize}{0pt}{}{}{1em}{NOTE:}
+
+\DeclareOption{theorems}{
+  \theoremstyle{dcsplain}
+  \ifthenelse{\isundefined{\chaptermark}}
+    {\newtheorem{example}{Example}}
+    {\newtheorem{example}{Example}[chapter]}
+  \theoremstyle{dcsnote}
+  \ifthenelse{\isundefined{\chaptermark}}
+    {\newtheorem{note}{Note}}
+    {\newtheorem{note}{Note}[chapter]}
+  \theoremstyle{dcs}
+  \ifthenelse{\isundefined{\chaptermark}}
+    {\newtheorem{definition}{Definition}
+     \newtheorem{conjecture}{Conjecture}
+     \newtheorem{corollary}{Corollary}
+     \newtheorem{exercise}{Exercise}
+     \newtheorem{lemma}{Lemma}
+     \newtheorem{problem}{Problem}
+     \newtheorem{property}{Property}
+     \newtheorem{proposition}{Proposition}
+     \newtheorem{question}{Question}
+     \newtheorem{remark}{Remark}
+     \newtheorem{solution}{Solution}
+     \newtheorem{theorem}{Theorem}}
+    {\newtheorem{definition}{Definition}[chapter]
+     \newtheorem{conjecture}{Conjecture}[chapter]
+     \newtheorem{corollary}{Corollary}[chapter]
+     \newtheorem{exercise}{Exercise}[chapter]
+     \newtheorem{lemma}{Lemma}[chapter]
+     \newtheorem{problem}{Problem}[chapter]
+     \newtheorem{property}{Property}[chapter]
+     \newtheorem{proposition}{Proposition}[chapter]
+     \newtheorem{question}{Question}[chapter]
+     \newtheorem{remark}{Remark}[chapter]
+     \newtheorem{solution}{Solution}[chapter]
+     \newtheorem{theorem}{Theorem}[chapter]}
+  \newenvironment{claim}
+    {\addvspace{\bigskipamount}\noindent\textit{Claim.}}
+    {\par\addvspace{\bigskipamount}}
+}
+
+
+% standard typewriter font
+\DeclareOption{lmtt}{
+  \renewcommand{\ttdefault}{lmtt}
+  \lstset{basewidth=0.5em}
+}
+
+
+% dispitems environment
+\newlength{\dispitemthislabel}
+\newcommand{\dispitemlabel}[1]{%
+  \settowidth{\dispitemthislabel}{\mbox{#1}}%
+  \ifthenelse{\lengthtest{\dispitemthislabel > \labelwidth}}%
+    {\raisebox{0ex}[5ex]{\parbox[b]{\labelwidth}{\makebox[0pt][l]{#1}\\}}}%
+    {\mbox{#1}}%
+  \hfil\relax
+}
+
+\newenvironment{dispitems}[1]%
+  {\begin{list}{}%
+    {\renewcommand{\makelabel}{\dispitemlabel}%
+     \ifthenelse{\equal{#1}{default} \OR \equal{#1}{}}%
+       {\setlength{\leftmargin}{\csname leftmargin\romannumeral\the\@listdepth\endcsname}}%
+       {\setlength{\leftmargin}{#1}}%
+     \setlength{\labelwidth}{\leftmargin}%
+     \setlength{\labelsep}{0.6em}%
+     \addtolength{\labelwidth}{-\labelsep}%
+     \setlength{\rightmargin}{0em}%
+    }%
+  }%
+  {\end{list}}
+
+
+% LyX-Code-Small
+\newcommand{\lyxcodesmallfont}{\small}
+\newcommand{\lyxcodesmallleft}{}
+\newenvironment{lyxcodesmall}
+  {\begin{list}{}{
+    \setlength{\listparindent}{0pt}% needed for AMS classes
+    \ifthenelse{\equal{\lyxcodesmallleft}{}}{}{
+      \setlength{\leftmargin}{\lyxcodesmallleft}}
+    \raggedright
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \normalfont\ttfamily\lyxcodesmallfont}%
+   \item[]}
+  {\end{list}}
+
+
+% enumeratex
+\newenvironment{enumeratex}[1]%
+  {\advance\@enumdepth\@ne\begin{enumerate}[#1]}%
+  {\end{enumerate}}
+
+
+% extra commands
+\newcommand{\K}[1]{{\fbox{\small\sffamily{}#1}}}
+\providecommand{\email}[1]{\texttt{\small #1}}
+
+
+\ProcessOptions*

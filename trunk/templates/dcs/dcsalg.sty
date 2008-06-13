@@ -1,0 +1,97 @@
+%
+%  $Id: dcsalg.sty,v 1.16 2005/12/09 17:01:05 sobaniec Exp $
+%
+%  Algorithm environment of DCS group
+%  by Cezary Sobaniec <sobaniec@cs.put.poznan.pl>
+%
+
+\RequirePackage{float}
+\RequirePackage{algpseudocode}
+\RequirePackage{keyval}
+\RequirePackage{ifthen}
+
+\renewcommand{\algorithmiccomment}[1]{/* \textit{#1} */}
+\renewcommand{\algorithmicforall}{\textbf{foreach}}
+
+% additional commands
+\newcommand{\AND}{\textbf{and}\ }
+\newcommand{\OR}{\textbf{or}\ }
+\newcommand{\NOT}{\textbf{not}\ }
+\newcommand{\algorithmicprocname}{\textbf{Procedure:}}
+\newcommand{\ProcName}{\item[\algorithmicprocname]}
+\newcommand{\algorithmicparameters}{\textbf{Parameters:}}
+\newcommand{\Parameters}{\item[\algorithmicparameters]}
+\newcommand{\Statey}[1]{\item[#1]}
+\newcommand{\Stateybf}[1]{\item[\textbf{#1}]}
+\newcommand{\Stateysf}[1]{\item[\textsf{#1}]}
+\newcommand{\Stateytt}[1]{\item[\texttt{#1}]}
+
+%
+% dcsalg environment
+%
+
+% width parameter 
+\newlength{\@dcsalgwidth}
+\setlength{\@dcsalgwidth}{\textwidth}
+\addtolength{\@dcsalgwidth}{-1em}
+\define@key{dcsalg}{width}{\setlength{\@dcsalgwidth}{#1}}
+
+% font parameter
+\newcommand{\@dcsalgfont}{}
+\define@key{dcsalg}{font}{\renewcommand{\@dcsalgfont}{#1}}
+
+% number parameter
+\newboolean{@dcsalgnumber}
+\setboolean{@dcsalgnumber}{false}
+\define@key{dcsalg}{number}[]{\setboolean{@dcsalgnumber}{true}}
+
+% plain|boxed|ruled parameters
+\newboolean{@dcsalgruled}
+\setboolean{@dcsalgruled}{false}
+\newboolean{@dcsalgboxed}
+\setboolean{@dcsalgboxed}{false}
+\define@key{dcsalg}{plain}[]{\setboolean{@dcsalgruled}{false}
+                             \setboolean{@dcsalgboxed}{false}}
+\define@key{dcsalg}{ruled}[]{\setboolean{@dcsalgruled}{true}
+                             \setboolean{@dcsalgboxed}{true}}
+\define@key{dcsalg}{boxed}[]{\setboolean{@dcsalgruled}{false}
+                             \setboolean{@dcsalgboxed}{true}}
+
+\newenvironment{dcsalg}[1][]%
+  {\setkeys{dcsalg}{#1}%
+   \if@dcsalgboxed
+     \if@dcsalgruled
+       \begin{tabular}{c}%
+     \else
+       \begin{tabular}{|c|}%
+     \fi
+     \hline%
+   \fi
+   \begin{minipage}{\@dcsalgwidth}\smallskip%
+   \if@dcsalgnumber
+     \begin{algorithmic}[1]%
+   \else
+     \begin{algorithmic}%
+   \fi
+   \@dcsalgfont}%
+  {\end{algorithmic}%
+   \smallskip%
+   \end{minipage}%
+   \if@dcsalgboxed
+     \tabularnewline%
+     \hline%
+     \end{tabular}
+   \fi}
+
+\newcommand{\dcsalgset}[1]{\setkeys{dcsalg}{#1}}
+
+
+% algorithm float
+\floatstyle{plain}
+\ifthenelse{\isundefined{\chaptermark}}
+  {\newfloat{algorithm}{htbp}{loa}}
+  {\newfloat{algorithm}{htbp}{loa}[chapter]}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\algorithmname}
+\providecommand{\listofalgorithms}{\listof{algorithm}{\listalgorithmname}}
+
