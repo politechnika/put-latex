@@ -24,6 +24,12 @@ Wspólne
 - Nie używaj modyfikatora [h] (here) do rysunków i tabel. Rysunki i tabele powinny być
   justowane do góry strony lub na stronie osobnej.
 
+- Wyróżnienie w tekście to polecenie \emph{wyraz}, nie należy używać czcionki pogrubionej (która
+  wystaje wizualnie z tekstu i rozprasza).
+
+- Nazwy plików, katalogów, ścieżek, zmiennych środowiskowych, klas i metod formatujemy poleceniem
+  \texttt{plik\_o\_pewnej\_nazwie}.
+
 
 Prace pisane w języku polskim
 -----------------------------
