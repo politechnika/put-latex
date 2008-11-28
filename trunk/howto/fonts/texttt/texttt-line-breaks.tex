@@ -1,0 +1,38 @@
+
+\documentclass[10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\section{Justification and hyphenation of texttt}
+
+\begin{center}
+\begin{minipage}{4cm}
+\ttfamily\spaceskip .5em plus .3em minus .3em\hyphenchar\font=`\-
+(JUSTIFICATION AND HYPHENATION) \\[5mm]
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce eu metus. Aliquam ac sem quis lectus laoreet semper. Maecenas viverra dui sit amet ipsum. Vestibulum pretium, mauris venenatis porta cursus.
+\end{minipage}
+\hspace{1cm}
+\begin{minipage}{4cm}
+\ttfamily\spaceskip .5em plus .3em minus .3em\hyphenchar\font=-1
+(JUSTIFICATION ONLY) \\[5mm]
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce eu metus. Aliquam ac sem quis lectus laoreet semper. Maecenas viverra dui sit amet ipsum. Vestibulum pretium, mauris venenatis porta cursus.
+\end{minipage}
+
+\end{center}
+
+\section{Special macro for tt-style keywords}
+
+\newcommand\kw[1]{% keywords
+  \texttt{\spaceskip .5em plus .3em minus .3em
+    \hyphenchar\font=`\-\relax #1}} 
+
+\begin{center}
+\begin{minipage}{4cm}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \kw{MyKeyWordIsLongAndBlahBlah} Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+\end{minipage}
+\end{center}
+
+\end{document}
