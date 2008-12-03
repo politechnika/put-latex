@@ -2,7 +2,7 @@
 
 if [ $# -lt 2 ]; then
   echo "Executes the command sequentially. Usage:"
-  echo "$0 [ -q | --quiet ] hosts_file remote_command"
+  echo "$0 [ -q | --quiet ] [ --ssh known_hosts ] hosts_file remote_command"
   exit 1
 fi
 
@@ -11,10 +11,18 @@ if [ "$1" == "-q" -o "$1" == "--quiet" ]; then
   shift
 fi
 
+if [ "$1" == "--ssh" ]; then
+  SSH_KNOWN_HOSTS_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=$2"
+  shift
+  shift
+else
+  SSH_KNOWN_HOSTS_OPTS=''
+fi
+
 HOSTS=$1
 shift
 
-SSH_OPTS="-o ConnectTimeout=2 -o BatchMode=yes"
+SSH_OPTS="-o ConnectTimeout=2 -o BatchMode=yes $SSH_KNOWN_HOSTS_OPTS"
 
 TMP=`mktemp -t -d`
 sed -e 's/#.*//' -e '/^[ \t]*$/d' $HOSTS > $TMP/hosts
