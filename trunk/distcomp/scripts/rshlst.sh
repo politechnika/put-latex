@@ -17,4 +17,5 @@ hook_afterall_hosts() {
 	cat $TMP/*.result | sort
 }
 
-. rshrunner.sh
+d=`dirname $0`
+. "$d/rshrunner.sh"

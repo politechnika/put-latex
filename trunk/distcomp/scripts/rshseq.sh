@@ -32,4 +32,5 @@ hook_afterall_hosts() {
 	echo "$GOOD successful, $BAD failed."
 }
 
-. rshrunner.sh
+d=`dirname $0`
+. "$d/rshrunner.sh"
