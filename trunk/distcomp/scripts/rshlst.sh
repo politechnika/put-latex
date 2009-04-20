@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 hook_usage_head="Lists SSH-accessible hosts."
 hook_usage_args=""

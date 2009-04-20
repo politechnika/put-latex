@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ##########
 # This file contains common code used in rsh* set of commands.

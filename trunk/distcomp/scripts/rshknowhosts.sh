@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 hook_usage_head="Feeds SSH's known_hosts with a list of hosts."
 hook_usage_args=""

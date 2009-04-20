@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 hook_usage_head="Executes the command sequentially."
 hook_usage_args="remote_command"
