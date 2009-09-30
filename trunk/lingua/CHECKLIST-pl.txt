@@ -1,0 +1,32 @@
+
+Częste błędy językowe dla prac pisanych w języku polskim
+--------------------------------------------------------
+
+1. Nie używać żargonu i unikać kalek językowych. Wyrazy absolutnie zabronione:
+
+  ENGINE
+  "oparty na enginie Hadoop" -> w oparciu o projekt Hadoop
+
+  MAPA
+  "trzymamy w mapie" -> "przechowujemy w tablicy asocjacyjnej"
+
+
+2. Funkcjonalność.
+
+  Funkcjonalność nie ma liczby mnogiej (mówi się o funkcjonalności aplikacji,
+  ale aplikacja nie ma _wielu_ funkcjonalności; ma wiele _funkcji_).
+
+
+3. Inne błędy ortograficzne i stylistyczne.
+
+  za pomocą -> przy pomocy
+  oparty na -> w oparciu o, oparty o
+  napewno   -> na pewno
+  za pomocą -> przy pomocy
+
+
+4. Internet.
+
+  Internet raczej spowszedniał, więc internet, a nie Internet (obie formy są
+  poprawne, choć preferuję pisownię małymi literami).
+
