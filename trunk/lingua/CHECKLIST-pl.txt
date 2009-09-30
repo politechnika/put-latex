@@ -10,6 +10,13 @@ Częste błędy językowe dla prac pisanych w języku polskim
   MAPA
   "trzymamy w mapie" -> "przechowujemy w tablicy asocjacyjnej"
 
+  PARAGRAF
+  Po polsku mówi się "akapit"; no chyba, że faktycznie chodzi o paragraf w sensie prawnym.
+
+  SEKCJA
+  Po polsku mówi się "rozdział", "podrozdział", ew. "część". Sekcja może być użyta we frazie
+  "sekcja zwłok".
+
 
 2. Funkcjonalność.
 
