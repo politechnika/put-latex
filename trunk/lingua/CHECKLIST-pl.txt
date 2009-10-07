@@ -7,6 +7,9 @@ Częste błędy językowe dla prac pisanych w języku polskim
   ENGINE
   "oparty na enginie Hadoop" -> w oparciu o projekt Hadoop
 
+  FRAMEWORK
+  "frameworka, frameworku" -> bibliotece, projekcie [w zależności od kontekstu]
+
   MAPA
   "trzymamy w mapie" -> "przechowujemy w tablicy asocjacyjnej"
 
