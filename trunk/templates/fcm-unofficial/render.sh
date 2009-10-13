@@ -5,13 +5,11 @@
 # latexmk -pvc -pdf thesis-master-english.tex
 #
 
-for type in bachelor master; do
-    for lang in english polski; do
-        pdflatex thesis-$type-$lang.tex
-        bibtex   thesis-$type-$lang
-        pdflatex thesis-$type-$lang.tex
-        pdflatex thesis-$type-$lang.tex
-    done
+for type in bachelor-english bachelor-polski master-english master-polski-nicer master-polski; do
+        pdflatex thesis-$type.tex
+        bibtex   thesis-$type
+        pdflatex thesis-$type.tex
+        pdflatex thesis-$type.tex
 done
 
 rm -f *.aux *.bak *.log *.blg *.bbl *.toc *.out

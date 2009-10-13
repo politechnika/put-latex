@@ -9,8 +9,10 @@
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2007/03/30 v0.96 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2009/10/13 v0.97 PP FCM thesis class]
 
+% v.0.97 Added \authortitle{} for people who really need to have "inż." in front of their names.
+%        Dropped "r." from the title page in Polish.
 % v.0.96 Fix for setspace package: emulation of new memoir commands for older memoir packages (tetex).
 % v.0.95 Fix for setspace package emulated by memoir, causing exceptions in MikTeX 2.5  
 % v.0.94 Added "bachelor" option for bachelor theses. 
@@ -109,7 +111,12 @@
 \newcommand{\ppsupervisor}[1]{\def\@ppsupervisor{#1}}
 \newcommand{\ppyear}[1]{\def\@ppyear{#1}}
 
+\newcommand{\authortitle}[1]{\def\@authortitle{#1}}
+
 \setlength{\droptitle}{0cm}
+
+\preauthor{\begin{center}\large\@authortitle}
+\postauthor{\end{center}}
 
 \renewcommand{\maketitlehooka}{%
 \begin{center}
@@ -138,7 +145,7 @@ Promotor\\\@ppsupervisor
 \else
 Supervisor\\\@ppsupervisor
 \fi\end{center}
-\vspace{2cm}\begin{center}Pozna\'n, \@ppyear\if@pppolish~r.\fi\end{center}
+\vspace{2cm}\begin{center}Pozna\'n, \@ppyear\if@pppolish\fi\end{center}
 }
 
 %
