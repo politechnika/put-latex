@@ -7,6 +7,8 @@
 % (c) 2006--2011 Dawid Weiss, Poznan University of Technology
 % (c) 2012--     Przemyslaw Wesolek, Poznan University of Technology
 %
+% Check for an up-to-date version of this template at:
+% https://github.com/politechnika/put-latex
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{ppfcmthesis}[2012/07/04 v0.98 PP FCM thesis class]
