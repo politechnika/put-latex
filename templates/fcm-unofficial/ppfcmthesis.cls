@@ -1,16 +1,17 @@
 %
 % This is a LaTeX class for master and bachelor theses following the guidelines
-% of Faculty of Computing Science and Management at Poznan University of Technology.
+% of Faculty of Computing at Poznan University of Technology.
 %
 % This class is UNOFFICIAL and NOT ENDORSED by the university.
 %
-% (c) 2006--2007 Dawid Weiss
-% Poznan University of Technology
+% (c) 2006--2011 Dawid Weiss, Poznan University of Technology
+% (c) 2012--     Przemyslaw Wesolek, Poznan University of Technology
 %
 %
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{ppfcmthesis}[2009/10/13 v0.97 PP FCM thesis class]
+\ProvidesClass{ppfcmthesis}[2012/07/04 v0.98 PP FCM thesis class]
 
+% v.0.98 Changed faculty name.
 % v.0.97 Added \authortitle{} for people who really need to have "inż." in front of their names.
 %        Dropped "r." from the title page in Polish.
 % v.0.96 Fix for setspace package: emulation of new memoir commands for older memoir packages (tetex).
@@ -121,9 +122,9 @@
 \renewcommand{\maketitlehooka}{%
 \begin{center}
 \if@pppolish
-Politechnika Pozna\'nska\\Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\Instytut Informatyki
+Politechnika Pozna\'nska\\Wydzia{\l} Informatyki\\Instytut Informatyki
 \else
-Poznan University of Technology\\Faculty of Computing Science and Management\\Institute of Computing Science
+Poznan University of Technology\\Faculty of Computing\\Institute of Computing Science
 \fi\end{center}}
 
 \pretitle{\vspace{2cm}\begin{center}%
@@ -163,10 +164,10 @@ Supervisor\\\@ppsupervisor
 
 \medskip\noindent%
 \if@pppolish%
-Instytut Informatyki, Wydzia{\l} Informatyki i Zarz{\k{a}}dzania\\%
+Instytut Informatyki, Wydzia{\l} Informatyki\\%
 Politechnika Pozna\'nska%
 \else%
-Poznan University of Technology\\Faculty of Computing Science and Management\\Institute of Computing Science
+Poznan University of Technology\\Faculty of Computing\\Institute of Computing Science
 \fi
 
 \medskip\noindent%
