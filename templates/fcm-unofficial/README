@@ -1,31 +1,31 @@
 
-WSTÊP
+WSTÄ˜P
 -----
 
 
-Niniejszy katalog zawiera LaTeX-owy style, który odpowiadaj¹ wytycznym
-formatowania prac in¿ynierskich i magisterskich 
-Wydzia³u Informatyki i Zarz¹dzania Politechniki Poznañskiej.
+Niniejszy katalog zawiera LaTeX-owy style, ktÃ³ry odpowiadajÄ… wytycznym
+formatowania prac inÅ¼ynierskich i magisterskich 
+WydziaÅ‚u Informatyki i ZarzÄ…dzania Politechniki PoznaÅ„skiej.
 
-Pytania proszê kierowaæ na grupê u¿ytkowników systemu LaTeX
-(po uprzednim zapisaniu siê):
+Pytania proszÄ™ kierowaÄ‡ na grupÄ™ uÅ¼ytkownikÃ³w systemu LaTeX
+(po uprzednim zapisaniu siÄ™):
 
 put-latex@yahoogroups.com
 
-Zawsze aktualne wersje stylu PPFCM oraz przyk³ady pe³nych prac
-formatowanych w tym stylu s¹ dostêpne w repozytorium SVN.
+Zawsze aktualne wersje stylu PPFCM oraz przykÅ‚ady peÅ‚nych prac
+formatowanych w tym stylu sÄ… dostÄ™pne w repozytorium SVN.
 
-https://ophelia.cs.put.poznan.pl/svn/put-latex/trunk
+https://github.com/politechnika/put-latex
 
 
 
 KOMPILACJA
 ----------
 
-Zaleca siê u¿ywanie kompilatora pdflatex, choæ jest mo¿liwe (i powinno dzia³aæ)
-kompilowanie równie¿ przy pomocy latex (do pliku DVI).
+Zaleca siÄ™ uÅ¼ywanie kompilatora pdflatex, choÄ‡ jest moÅ¼liwe (i powinno dziaÅ‚aÄ‡)
+kompilowanie rÃ³wnieÅ¼ przy pomocy latex (do pliku DVI).
 
-U¿yteczne zapewne bêd¹ nastêpuj¹ce narzêdzia:
+UÅ¼yteczne zapewne bÄ™dÄ… nastÄ™pujÄ…ce narzÄ™dzia:
 
 - TeXlipse (http://texlipse.sourceforge.net/)
 
@@ -33,4 +33,4 @@ U¿yteczne zapewne bêd¹ nastêpuj¹ce narzêdzia:
 
 - KILE (http://kile.sourceforge.net/)
 
-- JEdit + latexmk (skrypt do kompilacji z linii poleceñ)
+- JEdit + latexmk (skrypt do kompilacji z linii poleceÅ„)
